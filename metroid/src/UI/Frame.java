@@ -7,57 +7,12 @@ public class Frame extends Applet {
      * Variable section
      */
 
-    // Counter and total used to track the loading of the sound clips.
-    int clipTotal   = 0;
-    int clipsLoaded = 0;
-
-
-    // Copyright information.
-    String copyName = "Asteroids";
-    String copyVers = "Version 1.3";
-    String copyInfo = "Copyright 1998-2001 by Mike Hall";
-    String copyLink = "http://www.brainjar.com";
-    String copyText = copyName + '\n' + copyVers + '\n'
-            + copyInfo + '\n' + copyLink;
-
-    // Constants
-    static final int DELAY = 20;             // Milliseconds between screen and
-    static final int FPS   =                 // the resulting frame rate.
-            Math.round(1000 / DELAY);
-
-
-    static final int MAX_SHOTS =  8;          // Maximum number of sprites
-    static final int MAX_ROCKS =  8;          // for photons, asteroids and
-    static final int MAX_SCRAP = 40;          // explosions.
-    static final int SCRAP_COUNT  = 2 * FPS;  // Timer counter starting values
-    static final int HYPER_COUNT  = 3 * FPS;  // calculated using number of
-    static final int MISSLE_COUNT = 4 * FPS;  // seconds x frames per second.
-    static final int STORM_PAUSE  = 2 * FPS;
-
-    // Ship data.
-    int shipsLeft;       // Number of ships left in game, including current one.
-    int shipCounter;     // Timer counter for ship explosion.
-    int hyperCounter;    // Timer counter for hyperspace.
-
     // Flags for game state and options.
     boolean loaded = false;
     boolean paused;
     boolean playing;
     boolean sound;
     boolean detail;
-
-    // Missle data.
-    int missleCounter;    // Counter for life of missle.
-
-
-    // Sprite objects.
-    AsteroidsSprite   ship;
-    AsteroidsSprite   fwdThruster, revThruster;
-    AsteroidsSprite   ufo;
-    AsteroidsSprite   missle;
-    AsteroidsSprite[] photons    = new AsteroidsSprite[MAX_SHOTS];
-    AsteroidsSprite[] asteroids  = new AsteroidsSprite[MAX_ROCKS];
-    AsteroidsSprite[] explosions = new AsteroidsSprite[MAX_SCRAP];
 
     // Off screen image.
     Dimension offDimension;
@@ -73,10 +28,6 @@ public class Frame extends Applet {
     FontMetrics fm = getFontMetrics(font);
     int fontWidth  = fm.getMaxAdvance();
     int fontHeight = fm.getHeight();
-
-    // Explosion data.
-    int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
-    int   explosionIndex;                         // Next available explosion sprite.
 
     // Game data.
     int score;
