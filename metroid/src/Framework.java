@@ -6,6 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.event.KeyListener;
 
 public class Framework extends Applet implements Runnable, KeyListener {
@@ -184,4 +185,70 @@ public class Framework extends Applet implements Runnable, KeyListener {
 
 		    paint(g);
 		  }
+	  
+	  public void render() {
+
+		    int i;
+
+		    // Render the sprite's shape and location by rotating it's base shape and
+		    // moving it to it's proper screen position.
+
+		    this.sprite = new Polygon();
+		    for (i = 0; i < this.shape.npoints; i++)
+		      this.sprite.addPoint((int) Math.round(this.shape.xpoints[i] * Math.cos(this.angle) + this.shape.ypoints[i] * Math.sin(this.angle)) + (int) Math.round(this.x) + width / 2,
+		                           (int) Math.round(this.shape.ypoints[i] * Math.cos(this.angle) - this.shape.xpoints[i] * Math.sin(this.angle)) + (int) Math.round(this.y) + height / 2);
+		  }
+	  
+	  public boolean advance() {
+
+		    boolean wrapped;
+
+		    // Update the rotation and position of the sprite based on the delta
+		    // values. If the sprite moves off the edge of the screen, it is wrapped
+		    // around to the other side and TRUE is returnd.
+
+		    this.angle += this.deltaAngle;
+		    if (this.angle < 0)
+		      this.angle += 2 * Math.PI;
+		    if (this.angle > 2 * Math.PI)
+		      this.angle -= 2 * Math.PI;
+		    wrapped = false;
+		    this.x += this.deltaX;
+		    if (this.x < -width / 2) {
+		      this.x += width;
+		      wrapped = true;
+		    }
+		    if (this.x > width / 2) {
+		      this.x -= width;
+		      wrapped = true;
+		    }
+		    this.y -= this.deltaY;
+		    if (this.y < -height / 2) {
+		      this.y += height;
+		      wrapped = true;
+		    }
+		    if (this.y > height / 2) {
+		      this.y -= height;
+		      wrapped = true;
+		    }
+
+		    return wrapped;
+		  }
+
+	  public boolean isColliding(AsteroidsSprite s) {
+
+		    int i;
+
+		    // Determine if one sprite overlaps with another, i.e., if any vertice
+		    // of one sprite lands inside the other.
+
+		    for (i = 0; i < s.sprite.npoints; i++)
+		      if (this.sprite.contains(s.sprite.xpoints[i], s.sprite.ypoints[i]))
+		        return true;
+		    for (i = 0; i < this.sprite.npoints; i++)
+		      if (s.sprite.contains(this.sprite.xpoints[i], this.sprite.ypoints[i]))
+		        return true;
+		    return false;
+		  }
+		}
 }
