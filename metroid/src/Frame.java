@@ -181,12 +181,12 @@ public class Frame extends Applet {
             // flicker effect.
 
             if (!paused && detail && Math.random() < 0.5) {
-                if (KeyControl.up) {
+                if (keyControls.up) {
                     offGraphics.drawPolygon(fwdThruster.sprite);
                     offGraphics.drawLine(fwdThruster.sprite.xpoints[fwdThruster.sprite.npoints - 1], fwdThruster.sprite.ypoints[fwdThruster.sprite.npoints - 1],
                             fwdThruster.sprite.xpoints[0], fwdThruster.sprite.ypoints[0]);
                 }
-                if (KeyControl.down) {
+                if (keyControls.down) {
                     offGraphics.drawPolygon(revThruster.sprite);
                     offGraphics.drawLine(revThruster.sprite.xpoints[revThruster.sprite.npoints - 1], revThruster.sprite.ypoints[revThruster.sprite.npoints - 1],
                             revThruster.sprite.xpoints[0], revThruster.sprite.ypoints[0]);

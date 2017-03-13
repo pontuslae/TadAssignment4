@@ -2,6 +2,13 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 
 public class keyControls {
+
+		// Key flags.
+		public static boolean left  = false;
+		public static boolean right = false;
+		public static boolean up    = false;
+		public static boolean down  = false;
+
 	  public void keyPressed(KeyEvent e) {
 
 		    char c;
