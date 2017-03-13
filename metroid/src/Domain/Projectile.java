@@ -1,3 +1,5 @@
+package Domain;
+
 /**
  * Created by pontu on 10/03/2017.
  */
@@ -85,7 +87,7 @@ class Missle extends Projectile {
 							crashSound.play();
 						explode(missle);
 						stopMissle();
-						score += MISSLE_POINTS;
+						score += Framework.MISSLE_POINTS;
 					}
 				if (active && ship.active &&
 						hyperCounter <= 0 && ship.isColliding(missle)) {
@@ -125,8 +127,8 @@ class Missle extends Projectile {
 		angle = angle - Math.PI / 2;
 
 		// Change the missle's angle so that it points toward the ship.
-		deltaX = 0.75 * MAX_ROCK_SPEED * -Math.sin(angle);
-		deltaY = 0.75 * MAX_ROCK_SPEED *  Math.cos(angle);
+		deltaX = 0.75 * Framework.MAX_ROCK_SPEED * -Math.sin(angle);
+		deltaY = 0.75 * Framework.MAX_ROCK_SPEED *  Math.cos(angle);
 	}
 
 	public void stopMissle() {
