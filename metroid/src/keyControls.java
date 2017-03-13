@@ -37,13 +37,13 @@ public class keyControls {
 		        fireSound.play();
 		      photonTime = System.currentTimeMillis();
 		      photonIndex++;
-		      if (photonIndex >= MAX_SHOTS)
+		      if (photonIndex >= Framework.MAX_SHOTS)
 		        photonIndex = 0;
 		      photons[photonIndex].active = true;
 		      photons[photonIndex].x = ship.x;
 		      photons[photonIndex].y = ship.y;
-		      photons[photonIndex].deltaX = 2 * MAX_ROCK_SPEED * -Math.sin(ship.angle);
-		      photons[photonIndex].deltaY = 2 * MAX_ROCK_SPEED *  Math.cos(ship.angle);
+		      photons[photonIndex].deltaX = 2 * Framework.MAX_ROCK_SPEED * -Math.sin(ship.angle);
+		      photons[photonIndex].deltaY = 2 * Framework.MAX_ROCK_SPEED *  Math.cos(ship.angle);
 		    }
 
 		    // Allow upper or lower case characters for remaining keys.
@@ -53,10 +53,10 @@ public class keyControls {
 		    // 'H' key: warp ship into hyperspace by moving to a random location and
 		    // starting counter.
 
-		    if (c == 'h' && ship.active && hyperCounter <= 0) {
+		    if (c == 'h' && ship.active && Framework.hyperCounter <= 0) {
 		      ship.x = Math.random() * AsteroidsSprite.width;
 		      ship.y = Math.random() * AsteroidsSprite.height;
-		      hyperCounter = HYPER_COUNT;
+		      Framework.hyperCounter = Framework.HYPER_COUNT;
 		      if (sound & !paused)
 		        warpSound.play();
 		    }
@@ -121,7 +121,7 @@ public class keyControls {
 
 		    if (e.getKeyCode() == KeyEvent.VK_HOME)
 		      try {
-		        getAppletContext().showDocument(new URL(copyLink));
+		        getAppletContext().showDocument(new URL(Framework.copyLink));
 		      }
 		      catch (Exception excp) {}
 		  }

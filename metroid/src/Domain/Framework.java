@@ -9,14 +9,14 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyListener;
 
-public class Framework extends Applet implements Runnable, KeyListener {
+public class Framework {
 
 	// Copyright information.
 
 	  String copyName = "Asteroids";
 	  String copyVers = "Version 1.3";
 	  String copyInfo = "Copyright 1998-2001 by Mike Hall";
-	  String copyLink = "http://www.brainjar.com";
+	 static String copyLink = "http://www.brainjar.com";
 	  String copyText = copyName + '\n' + copyVers + '\n'
 	                  + copyInfo + '\n' + copyLink;
 
@@ -98,13 +98,6 @@ public class Framework extends Applet implements Runnable, KeyListener {
 	  boolean sound;
 	  boolean detail;
 
-	  // Key flags.
-
-	  boolean left  = false;
-	  boolean right = false;
-	  boolean up    = false;
-	  boolean down  = false;
-
 	  // Sprite objects.
 
 	  AsteroidsSprite   ship;
@@ -119,7 +112,7 @@ public class Framework extends Applet implements Runnable, KeyListener {
 
 	  int shipsLeft;       // Number of ships left in game, including current one.
 	  int shipCounter;     // Timer counter for ship explosion.
-	  int hyperCounter;    // Timer counter for hyperspace.
+	 static int hyperCounter;    // Timer counter for hyperspace.
 
 	  // Photon data.
 
@@ -173,6 +166,12 @@ public class Framework extends Applet implements Runnable, KeyListener {
 	  Dimension offDimension;
 	  Image     offImage;
 	  Graphics  offGraphics;
+
+
+
+
+
+
 
 	  // Data for the screen font.
 
