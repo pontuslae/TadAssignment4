@@ -1,10 +1,12 @@
 package Application;
 
+import Domain.Framework;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
 
-public class keyControls implements KeyListener{
+public class keyControls extends Framework implements KeyListener{
 
 		// Key flags.
 		public static boolean left  = false;

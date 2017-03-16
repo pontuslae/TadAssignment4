@@ -19,7 +19,6 @@ import java.applet.AudioClip;
 
 public class Framework extends Applet {
 
-
 	// Fields:
 
 	static int width;          // Dimensions of the graphics area.
@@ -38,6 +37,7 @@ public class Framework extends Applet {
 
 	// Copyright information.
 
+
 	String copyName = "Asteroids";
 	String copyVers = "Version 1.3";
 	String copyInfo = "Copyright 1998-2001 by Mike Hall";
@@ -45,12 +45,14 @@ public class Framework extends Applet {
 	String copyText = copyName + '\n' + copyVers + '\n'
 			+ copyInfo + '\n' + copyLink;
 
+
 	// Thread control variables.
 
 	Thread loadThread;
 	Thread loopThread;
 
 	// Constants
+
 
 	static final int DELAY = 20;             // Milliseconds between screen and
 	static final int FPS   =                 // the resulting frame rate.
@@ -80,6 +82,7 @@ public class Framework extends Applet {
 
 	// Domain.Ship's rotation and acceleration rates and maximum speed.
 
+
 	static final double SHIP_ANGLE_STEP = Math.PI / FPS;
 	static final double SHIP_SPEED_STEP = 15.0 / FPS;
 	static final double MAX_SHIP_SPEED  = 1.25 * MAX_ROCK_SPEED;
@@ -87,8 +90,10 @@ public class Framework extends Applet {
 	static final int FIRE_DELAY = 50;         // Minimum number of milliseconds
 	// required between photon shots.
 
+
 	// Probablility of flying saucer firing a missle during any given frame
 	// (other conditions must be met).
+
 
 	static final double MISSLE_PROBABILITY = 0.45 / FPS;
 
@@ -97,16 +102,20 @@ public class Framework extends Applet {
 	static final int UFO_POINTS    = 250;
 	static final int MISSLE_POINTS = 500;
 
+
 	// Number of points the must be scored to earn a new ship or to cause the
 	// flying saucer to appear.
 
+
 	static final int NEW_SHIP_POINTS = 5000;
 	static final int NEW_UFO_POINTS  = 2750;
+
 
 	// Background stars.
 
 	int     numStars;
 	Point[] stars;
+
 
 	// Game data.
 
@@ -114,6 +123,7 @@ public class Framework extends Applet {
 	int highScore;
 	int newShipScore;
 	int newUfoScore;
+
 
 	// Flags for game state and options.
 
@@ -123,37 +133,35 @@ public class Framework extends Applet {
 	boolean sound;
 	boolean detail;
 
-	// Sprite objects.
 
-	/*
-	  AsteroidsSprite   ship;
-	  AsteroidsSprite   fwdThruster, revThruster;
-	  AsteroidsSprite   ufo;
-	  AsteroidsSprite   missle;
-	  AsteroidsSprite[] photons    = new AsteroidsSprite[MAX_SHOTS];
-	  AsteroidsSprite[] asteroids  = new AsteroidsSprite[MAX_ROCKS];
-	  AsteroidsSprite[] explosions = new AsteroidsSprite[MAX_SCRAP];
 
-*/
+
 	// Domain.Ship data.
+
 
 	int shipsLeft;       // Number of ships left in game, including current one.
 	int shipCounter;     // Timer counter for ship explosion.
 	static int hyperCounter;    // Timer counter for hyperspace.
+
 
 	// Photon data.
 
 	int   photonIndex;    // Index to next available photon sprite.
 	long  photonTime;     // Time value used to keep firing rate constant.
 
+
 	// Flying saucer data.
 
 	int ufoPassesLeft;    // Counter for number of flying saucer passes.
 	int ufoCounter;       // Timer counter used to track each flying saucer pass.
 
+
+
 	// Missle data.
 
+
 	int missleCounter;    // Counter for life of missle.
+
 
 	// Asteroid data.
 
@@ -163,6 +171,7 @@ public class Framework extends Applet {
 	int       asteroidsLeft;                               // Number of active asteroids.
 
 	// Explosion data.
+
 
 	int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	int   explosionIndex;                         // Next available explosion sprite.
@@ -183,10 +192,12 @@ public class Framework extends Applet {
 	boolean saucerPlaying;
 	boolean misslePlaying;
 
+
 	// Counter and total used to track the loading of the sound clips.
 
 	int clipTotal   = 0;
 	int clipsLoaded = 0;
+
 
 	// Off screen image.
 
@@ -197,15 +208,14 @@ public class Framework extends Applet {
 
 
 
-
-
-
 	// Data for the screen font.
+
 
 	Font font      = new Font("Helvetica", Font.BOLD, 12);
 	FontMetrics fm = getFontMetrics(font); // TODO: 16/03/2017 fix
 	int fontWidth  = fm.getMaxAdvance();
 	int fontHeight = fm.getHeight();
+
 
 	public void update(Graphics g) {
 

@@ -1,6 +1,9 @@
 package UI;
 
 import Domain.Framework;
+import Domain.Projectile;
+import Application.keyControls;
+
 import java.applet.Applet;
 import java.awt.*;
 
@@ -77,7 +80,7 @@ public class Frame extends Framework {
         // Draw photon bullets.
 
         offGraphics.setColor(Color.white);
-        for (i = 0; i < MAX_SHOTS; i++)
+        for (i = 0; i < Projectile.MAX_SHOTS; i++)
             if (photons[i].active)
                 offGraphics.drawPolygon(photons[i].sprite);
 
