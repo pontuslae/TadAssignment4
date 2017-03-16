@@ -1,3 +1,5 @@
+package Domain;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Dimension;

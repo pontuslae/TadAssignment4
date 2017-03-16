@@ -57,9 +57,9 @@ class Missle extends Projectile {
 	// missleCounter = MISSLE_COUNT;
     boolean misslePlaying = true;
 
-	private AsteroidsSprite ship; // Target
+	private Ship ship; // Target
 
-	public Missle(AsteroidsSprite ship){
+	public Missle(Ship ship){
 		this.ship = ship;
 		render();
 
