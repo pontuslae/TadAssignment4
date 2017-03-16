@@ -174,27 +174,27 @@ public class Asteroid {
 	            asteroidsLeft--;
 	            asteroids[i].active = false;
 	            photons[j].active = false;
-	            if (Main.sound)
+	            if (Framework.sound)
 	              explosionSound.play();
 	            explode(asteroids[i]);
 	            if (!asteroidIsSmall[i]) {
-	              Main.score += Main.BIG_POINTS;
+	              Framework.score += Framework.BIG_POINTS;
 	              initSmallAsteroids(i);
 	            }
 	            else
-	              Main.score += Main.SMALL_POINTS;
+	              Framework.score += Framework.SMALL_POINTS;
 	          }
 
 	        // If the ship is not in hyperspace, see if it is hit.
 
-	        if (Main.ship.active && Main.hyperCounter <= 0 &&
-	            asteroids[i].active && asteroids[i].isColliding(Main.ship)) {
-	          if (Main.sound)
+	        if (Framework.ship.active && Framework.hyperCounter <= 0 &&
+	            asteroids[i].active && asteroids[i].isColliding(Framework.ship)) {
+	          if (Framework.sound)
 	            crashSound.play();
-	          explode(Main.ship);
-	          Main.stopShip();
-	          Main.stopUfo();
-	          Main.stopMissle();
+	          explode(Framework.ship);
+	          Framework.stopShip();
+	          Framework.stopUfo();
+	          Framework.stopMissle();
 	        }
 	    }
 	  }
@@ -222,7 +222,7 @@ public class Asteroid {
 
 	    s.render();
 	    c = 2;
-	    if (Main.detail || s.sprite.npoints < 6)
+	    if (Framework.detail || s.sprite.npoints < 6)
 	      c = 1;
 	    for (i = 0; i < s.sprite.npoints; i += c) {
 	      explosionIndex++;
