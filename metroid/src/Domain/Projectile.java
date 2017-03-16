@@ -79,8 +79,7 @@ class Missle extends Projectile {
 					if (sound)
 						crashSound.play();
 					ship.explode(ship);
-					ship.stopShip();
-					ship.stopUfo();
+					ship.stop();
 					stopMissle();
 				}
 			}

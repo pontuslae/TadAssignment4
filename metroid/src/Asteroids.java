@@ -194,7 +194,7 @@ public class Asteroids extends Applet implements Runnable, KeyListener {
   static final int UFO_PASSES = 3;          // Number of passes for flying
                                             // saucer per appearance.
 
-  // Ship's rotation and acceleration rates and maximum speed.
+  // Domain.Ship's rotation and acceleration rates and maximum speed.
 
   static final double SHIP_ANGLE_STEP = Math.PI / FPS;
   static final double SHIP_SPEED_STEP = 15.0 / FPS;
@@ -256,7 +256,7 @@ public class Asteroids extends Applet implements Runnable, KeyListener {
   AsteroidsSprite[] asteroids  = new AsteroidsSprite[MAX_ROCKS];
   AsteroidsSprite[] explosions = new AsteroidsSprite[MAX_SCRAP];
 
-  // Ship data.
+  // Domain.Ship data.
 
   int shipsLeft;       // Number of ships left in game, including current one.
   int shipCounter;     // Timer counter for ship explosion.
@@ -698,7 +698,7 @@ public class Asteroids extends Applet implements Runnable, KeyListener {
       revThruster.render();
     }
 
-    // Ship is exploding, advance the countdown or create a new ship if it is
+    // Domain.Ship is exploding, advance the countdown or create a new ship if it is
     // done exploding. The new ship is added as though it were in hyperspace.
     // (This gives the player time to move the ship if it is in imminent
     // danger.) If that was the last ship, end the game.

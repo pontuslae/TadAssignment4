@@ -1,8 +1,10 @@
+package Domain;
+
 /**
  * Created by tim on 3/16/2017.
  */
 public class Saucer extends UFO {
-    AsteroidsSprite   ufo;
+    AsteroidsSprite ufo;
 
     @Override
     public void draw(){

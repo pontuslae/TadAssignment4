@@ -1,5 +1,5 @@
 package Domain;
 
-public class EnemyShip extends UFO{
+public class EnemyShip {
 
 }

@@ -1,142 +1,168 @@
 package Domain;
 
-import java.awt.Color;
+/**
+ * Created by tim on 3/16/2017.
+ */
+public class Ship extends UFO {
+    AsteroidsSprite ship;
+    AsteroidsSprite fwdThruster, revThruster;
 
-public class Ship extends UFO{
-	 static final int MAX_SHIPS = 3;           // Starting number of ships for
-     // each game.
-static final int UFO_PASSES = 3;          // Number of passes for flying
-     // saucer per appearance.
+    @Override
+    public void draw(){
+        // Create shape for the ship sprite.
 
-// Ship's rotation and acceleration rates and maximum speed.
+        ship = new AsteroidsSprite();
+        ship.shape.addPoint(0, -10);
+        ship.shape.addPoint(7, 10);
+        ship.shape.addPoint(-7, 10);
+    }
 
-static final double SHIP_ANGLE_STEP = Math.PI / FPS;  //TODO extending FrameWork
-static final double SHIP_SPEED_STEP = 15.0 / FPS;
-static final double MAX_SHIP_SPEED  = 1.25 * MAX_ROCK_SPEED;
+    public void drawThrusters(){
+            // Create shapes for the ship thrusters.
 
-static final int FIRE_DELAY = 50;         // Minimum number of milliseconds
-     // required between photon shots.
+        fwdThruster = new AsteroidsSprite();
+        fwdThruster.shape.addPoint(0, 12);
+        fwdThruster.shape.addPoint(-3, 16);
+        fwdThruster.shape.addPoint(0, 26);
+        fwdThruster.shape.addPoint(3, 16);
+        revThruster = new AsteroidsSprite();
+        revThruster.shape.addPoint(-2, 12);
+        revThruster.shape.addPoint(-4, 14);
+        revThruster.shape.addPoint(-2, 20);
+        revThruster.shape.addPoint(0, 14);
+        revThruster.shape.addPoint(2, 12);
+        revThruster.shape.addPoint(4, 14);
+        revThruster.shape.addPoint(2, 20);
+        revThruster.shape.addPoint(0, 14);
+    }
 
+    @Override
+    public void init() {
 
-	  public void initShip() {
+        // Reset the ship sprite at the center of the screen.
 
-		    // Reset the ship sprite at the center of the screen.
+        ship.active = true;
+        ship.angle = 0.0;
+        ship.deltaAngle = 0.0;
+        ship.x = 0.0;
+        ship.y = 0.0;
+        ship.deltaX = 0.0;
+        ship.deltaY = 0.0;
+        ship.render();
 
-		    ship.active = true;
-		    ship.angle = 0.0;
-		    ship.deltaAngle = 0.0;
-		    ship.x = 0.0;
-		    ship.y = 0.0;
-		    ship.deltaX = 0.0;
-		    ship.deltaY = 0.0;
-		    ship.render();
+        // Initialize thruster sprites.
 
-		    // Initialize thruster sprites.
+        fwdThruster.x = ship.x;
+        fwdThruster.y = ship.y;
+        fwdThruster.angle = ship.angle;
+        fwdThruster.render();
+        revThruster.x = ship.x;
+        revThruster.y = ship.y;
+        revThruster.angle = ship.angle;
+        revThruster.render();
 
-		    fwdThruster.x = ship.x;
-		    fwdThruster.y = ship.y;
-		    fwdThruster.angle = ship.angle;
-		    fwdThruster.render();
-		    revThruster.x = ship.x;
-		    revThruster.y = ship.y;
-		    revThruster.angle = ship.angle;
-		    revThruster.render();
+        if (loaded)
+            thrustersSound.stop();
+        thrustersPlaying = false;
+        hyperCounter = 0;
+    }
 
-		    if (loaded)
-		      thrustersSound.stop();
-		    thrustersPlaying = false;
-		    hyperCounter = 0;
-		  }
-	  public void updateShip() {
+    @Override
+    public void update() {
 
-		    double dx, dy, speed;
+        double dx, dy, speed;
 
-		    if (!playing)
-		      return;
+        if (!playing)
+            return;
 
-		    // Rotate the ship if left or right cursor key is down.
+        // Rotate the ship if left or right cursor key is down.
 
-		    if (left) {
-		      ship.angle += SHIP_ANGLE_STEP;
-		      if (ship.angle > 2 * Math.PI)
-		        ship.angle -= 2 * Math.PI;
-		    }
-		    if (right) {
-		      ship.angle -= SHIP_ANGLE_STEP;
-		      if (ship.angle < 0)
-		        ship.angle += 2 * Math.PI;
-		    }
+        if (left) {
+            ship.angle += Asteroids.SHIP_ANGLE_STEP;
+            if (ship.angle > 2 * Math.PI)
+                ship.angle -= 2 * Math.PI;
+        }
+        if (right) {
+            ship.angle -= Asteroids.SHIP_ANGLE_STEP;
+            if (ship.angle < 0)
+                ship.angle += 2 * Math.PI;
+        }
 
-		    // Fire thrusters if up or down cursor key is down.
+        // Fire thrusters if up or down cursor key is down.
 
-		    dx = SHIP_SPEED_STEP * -Math.sin(ship.angle);
-		    dy = SHIP_SPEED_STEP *  Math.cos(ship.angle);
-		    if (up) {
-		      ship.deltaX += dx;
-		      ship.deltaY += dy;
-		    }
-		    if (down) {
-		        ship.deltaX -= dx;
-		        ship.deltaY -= dy;
-		    }
+        dx = Asteroids.SHIP_SPEED_STEP * -Math.sin(ship.angle);
+        dy = Asteroids.SHIP_SPEED_STEP *  Math.cos(ship.angle);
+        if (up) {
+            ship.deltaX += dx;
+            ship.deltaY += dy;
+        }
+        if (down) {
+            ship.deltaX -= dx;
+            ship.deltaY -= dy;
+        }
 
-		    // Don't let ship go past the speed limit.
+        // Don't let ship go past the speed limit.
 
-		    if (up || down) {
-		      speed = Math.sqrt(ship.deltaX * ship.deltaX + ship.deltaY * ship.deltaY);
-		      if (speed > MAX_SHIP_SPEED) {
-		        dx = MAX_SHIP_SPEED * -Math.sin(ship.angle);
-		        dy = MAX_SHIP_SPEED *  Math.cos(ship.angle);
-		        if (up)
-		          ship.deltaX = dx;
-		        else
-		          ship.deltaX = -dx;
-		        if (up)
-		          ship.deltaY = dy;
-		        else
-		          ship.deltaY = -dy;
-		      }
-		      public void stopShip() {
+        if (up || down) {
+            speed = Math.sqrt(ship.deltaX * ship.deltaX + ship.deltaY * ship.deltaY);
+            if (speed > Asteroids.MAX_SHIP_SPEED) {
+                dx = Asteroids.MAX_SHIP_SPEED * -Math.sin(ship.angle);
+                dy = Asteroids.MAX_SHIP_SPEED *  Math.cos(ship.angle);
+                if (up)
+                    ship.deltaX = dx;
+                else
+                    ship.deltaX = -dx;
+                if (up)
+                    ship.deltaY = dy;
+                else
+                    ship.deltaY = -dy;
+            }
+        }
 
-		    	    ship.active = false;
-		    	    shipCounter = SCRAP_COUNT;
-		    	    if (shipsLeft > 0)
-		    	      shipsLeft--;
-		    	    if (loaded)
-		    	      thrustersSound.stop();
-		    	    thrustersPlaying = false;
-		    	  }
+        // Move the ship. If it is currently in hyperspace, advance the countdown.
 
-		    }
-		    
-		 // Draw the ship, counter is used to fade color to white on hyperspace.
+        if (ship.active) {
+            ship.advance();
+            ship.render();
+            if (hyperCounter > 0)
+                hyperCounter--;
 
-		    c = 255 - (255 / HYPER_COUNT) * hyperCounter;
-		    if (ship.active) {
-		      if (detail && hyperCounter == 0) {
-		        offGraphics.setColor(Color.black);
-		        offGraphics.fillPolygon(ship.sprite);
-		      }
-		      offGraphics.setColor(new Color(c, c, c));
-		      offGraphics.drawPolygon(ship.sprite);
-		      offGraphics.drawLine(ship.sprite.xpoints[ship.sprite.npoints - 1], ship.sprite.ypoints[ship.sprite.npoints - 1],
-		                           ship.sprite.xpoints[0], ship.sprite.ypoints[0]);
+            // Update the thruster sprites to match the ship sprite.
 
-		      // Draw thruster exhaust if thrusters are on. Do it randomly to get a
-		      // flicker effect.
+            fwdThruster.x = ship.x;
+            fwdThruster.y = ship.y;
+            fwdThruster.angle = ship.angle;
+            fwdThruster.render();
+            revThruster.x = ship.x;
+            revThruster.y = ship.y;
+            revThruster.angle = ship.angle;
+            revThruster.render();
+        }
 
-		      if (!paused && detail && Math.random() < 0.5) {
-		        if (up) {
-		          offGraphics.drawPolygon(fwdThruster.sprite);
-		          offGraphics.drawLine(fwdThruster.sprite.xpoints[fwdThruster.sprite.npoints - 1], fwdThruster.sprite.ypoints[fwdThruster.sprite.npoints - 1],
-		                               fwdThruster.sprite.xpoints[0], fwdThruster.sprite.ypoints[0]);
-		        }
-		        if (down) {
-		          offGraphics.drawPolygon(revThruster.sprite);
-		          offGraphics.drawLine(revThruster.sprite.xpoints[revThruster.sprite.npoints - 1], revThruster.sprite.ypoints[revThruster.sprite.npoints - 1],
-		                               revThruster.sprite.xpoints[0], revThruster.sprite.ypoints[0]);
-		        }
-		      }
-		    }
+        // Domain.Ship is exploding, advance the countdown or create a new ship if it is
+        // done exploding. The new ship is added as though it were in hyperspace.
+        // (This gives the player time to move the ship if it is in imminent
+        // danger.) If that was the last ship, end the game.
 
+        else
+        if (--counter <= 0)
+            if (shipsLeft > 0) {
+                initShip();
+                hyperCounter = Asteroids.HYPER_COUNT;
+            }
+            else
+                endGame();
+    }
+
+    @Override
+    public void stop() {
+
+        ship.active = false;
+        counter = Asteroids.SCRAP_COUNT;
+        if (shipsLeft > 0)
+            shipsLeft--;
+        if (loaded)
+            thrustersSound.stop();
+        thrustersPlaying = false;
+    }
 }

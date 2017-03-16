@@ -78,7 +78,7 @@ public class Framework extends Applet {
 	static final int UFO_PASSES = 3;          // Number of passes for flying
 	// saucer per appearance.
 
-	// Ship's rotation and acceleration rates and maximum speed.
+	// Domain.Ship's rotation and acceleration rates and maximum speed.
 
 	static final double SHIP_ANGLE_STEP = Math.PI / FPS;
 	static final double SHIP_SPEED_STEP = 15.0 / FPS;
@@ -135,7 +135,7 @@ public class Framework extends Applet {
 	  AsteroidsSprite[] explosions = new AsteroidsSprite[MAX_SCRAP];
 
 */
-	// Ship data.
+	// Domain.Ship data.
 
 	int shipsLeft;       // Number of ships left in game, including current one.
 	int shipCounter;     // Timer counter for ship explosion.
