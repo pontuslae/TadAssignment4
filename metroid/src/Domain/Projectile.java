@@ -8,9 +8,7 @@ public class Projectile extends Framework {
 
 	static final int MAX_SHOTS =  8;          // Maximum number of sprites
 
-
 	public Projectile() {
-
 	}
 }
 
@@ -28,11 +26,8 @@ class Photon extends Projectile {
 	}
 
 	public void updatePhotons() {
-
 		int i;
-
 		// Move any active photons. Stop it when its counter has expired.
-
 		for (i = 0; i < MAX_SHOTS; i++)
 			if (active) {
 				if (advance())
@@ -41,12 +36,11 @@ class Photon extends Projectile {
 					active = false;
 			}
 	}
-
 }
 
 class Missle extends Projectile {
 
-    boolean misslePlaying = true;
+	boolean misslePlaying = true;
 
 	private Ship ship; // Target
 
@@ -73,15 +67,15 @@ class Missle extends Projectile {
 				advance();
 				render();
 				for (i = 0; i < MAX_SHOTS; i++)
-					if (photons[i].active && isColliding(photons[i])) {
+					if (active && isColliding(this)) {
 						if (sound)
 							crashSound.play();
-						explode(missle);
+						explode(this);
 						stopMissle();
 						score += Framework.MISSLE_POINTS;
 					}
 				if (active && ship.active &&
-						hyperCounter <= 0 && ship.isColliding(missle)) {
+						hyperCounter <= 0 && ship.isColliding(this)) {
 					if (sound)
 						crashSound.play();
 					ship.explode(ship);
