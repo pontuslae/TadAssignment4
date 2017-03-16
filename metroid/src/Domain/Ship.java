@@ -1,17 +1,20 @@
 package Domain;
 
+import Application.Main;
+import static Application.keyControls.*;
+
 /**
  * Created by tim on 3/16/2017.
  */
 public class Ship extends UFO {
-    AsteroidsSprite ship;
-    AsteroidsSprite fwdThruster, revThruster;
+    Framework ship;
+    Framework fwdThruster, revThruster;
 
     @Override
     public void draw(){
         // Create shape for the ship sprite.
 
-        ship = new AsteroidsSprite();
+        ship = new Framework();
         ship.shape.addPoint(0, -10);
         ship.shape.addPoint(7, 10);
         ship.shape.addPoint(-7, 10);
@@ -20,12 +23,12 @@ public class Ship extends UFO {
     public void drawThrusters(){
             // Create shapes for the ship thrusters.
 
-        fwdThruster = new AsteroidsSprite();
+        fwdThruster = new Framework();
         fwdThruster.shape.addPoint(0, 12);
         fwdThruster.shape.addPoint(-3, 16);
         fwdThruster.shape.addPoint(0, 26);
         fwdThruster.shape.addPoint(3, 16);
-        revThruster = new AsteroidsSprite();
+        revThruster = new Framework();
         revThruster.shape.addPoint(-2, 12);
         revThruster.shape.addPoint(-4, 14);
         revThruster.shape.addPoint(-2, 20);
@@ -78,20 +81,20 @@ public class Ship extends UFO {
         // Rotate the ship if left or right cursor key is down.
 
         if (left) {
-            ship.angle += Asteroids.SHIP_ANGLE_STEP;
+            ship.angle += Framework.SHIP_ANGLE_STEP;
             if (ship.angle > 2 * Math.PI)
                 ship.angle -= 2 * Math.PI;
         }
         if (right) {
-            ship.angle -= Asteroids.SHIP_ANGLE_STEP;
+            ship.angle -= Framework.SHIP_ANGLE_STEP;
             if (ship.angle < 0)
                 ship.angle += 2 * Math.PI;
         }
 
         // Fire thrusters if up or down cursor key is down.
 
-        dx = Asteroids.SHIP_SPEED_STEP * -Math.sin(ship.angle);
-        dy = Asteroids.SHIP_SPEED_STEP *  Math.cos(ship.angle);
+        dx = Framework.SHIP_SPEED_STEP * -Math.sin(ship.angle);
+        dy = Framework.SHIP_SPEED_STEP *  Math.cos(ship.angle);
         if (up) {
             ship.deltaX += dx;
             ship.deltaY += dy;
@@ -105,9 +108,9 @@ public class Ship extends UFO {
 
         if (up || down) {
             speed = Math.sqrt(ship.deltaX * ship.deltaX + ship.deltaY * ship.deltaY);
-            if (speed > Asteroids.MAX_SHIP_SPEED) {
-                dx = Asteroids.MAX_SHIP_SPEED * -Math.sin(ship.angle);
-                dy = Asteroids.MAX_SHIP_SPEED *  Math.cos(ship.angle);
+            if (speed > Framework.MAX_SHIP_SPEED) {
+                dx = Framework.MAX_SHIP_SPEED * -Math.sin(ship.angle);
+                dy = Framework.MAX_SHIP_SPEED *  Math.cos(ship.angle);
                 if (up)
                     ship.deltaX = dx;
                 else
@@ -147,18 +150,18 @@ public class Ship extends UFO {
         else
         if (--counter <= 0)
             if (shipsLeft > 0) {
-                initShip();
-                hyperCounter = Asteroids.HYPER_COUNT;
+                ship.init();
+                hyperCounter = Framework.HYPER_COUNT;
             }
             else
-                endGame();
+                Main.endGame();
     }
 
     @Override
     public void stop() {
 
         ship.active = false;
-        counter = Asteroids.SCRAP_COUNT;
+        counter = Framework.SCRAP_COUNT;
         if (shipsLeft > 0)
             shipsLeft--;
         if (loaded)
