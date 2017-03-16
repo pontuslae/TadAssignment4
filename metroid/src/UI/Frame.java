@@ -1,7 +1,11 @@
+package UI;
+
+import Domain.Framework;
 import java.applet.Applet;
 import java.awt.*;
 
-public class Frame extends Applet {
+
+public class Frame extends Framework {
 
     /**
      * Variable section

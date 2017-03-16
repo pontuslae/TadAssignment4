@@ -1,5 +1,6 @@
+package Domain;
 
-public class Main {
+public class Main implements Runnable {
 
 	  public void run() {
 

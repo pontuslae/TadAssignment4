@@ -11,7 +11,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyListener;
 
-public class Framework {
+
+public class Framework extends Applet {
 
 	class AsteroidsSprite {
 
