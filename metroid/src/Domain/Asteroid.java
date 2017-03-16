@@ -187,14 +187,14 @@ public class Asteroid {
 
 	        // If the ship is not in hyperspace, see if it is hit.
 
-	        if (Framework.ship.active && Framework.hyperCounter <= 0 &&
-	            asteroids[i].active && asteroids[i].isColliding(Framework.ship)) {
+	        if (UFO.ship.active && Framework.hyperCounter <= 0 &&
+	            asteroids[i].active && asteroids[i].isColliding(UFO.ship)) {
 	          if (Framework.sound)
 	            crashSound.play();
 	          explode(Framework.ship);
-	          Framework.stopShip();
-	          Framework.stopUfo();
-	          Framework.stopMissle();
+	          UFO.stopShip();
+	          UFO.stopUfo();
+	          UFO.stopMissle();
 	        }
 	    }
 	  }
