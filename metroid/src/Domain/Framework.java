@@ -10,44 +10,32 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyListener;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
+import java.util.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 
 public class Framework extends Applet {
 
-	class AsteroidsSprite {
 
 		  // Fields:
 
 		  static int width;          // Dimensions of the graphics area.
 		  static int height;
 
-		  Polygon shape;             // Base sprite shape, centered at the origin (0,0).
-		  boolean active;            // Active flag.
-		  double  angle;             // Current angle of rotation.
-		  double  deltaAngle;        // Amount to change the rotation angle.
-		  double  x, y;              // Current position on screen.
-		  double  deltaX, deltaY;    // Amount to change the screen position.
-		  Polygon sprite;            // Final location and shape of sprite after
+		  Polygon shape = new Polygon();;             // Base sprite shape, centered at the origin (0,0).
+		  boolean active = false;            // Active flag.
+		  double  angle = 0.0;             // Current angle of rotation.
+		  double  deltaAngle = 0.0;        // Amount to change the rotation angle.
+		  double  x = 0.0, y = 0.0;              // Current position on screen.
+		  double  deltaX = 0.0, deltaY = 0.0;    // Amount to change the screen position.
+		  Polygon sprite = new Polygon();            // Final location and shape of sprite after
 		                             // applying rotation and translation to get screen
 		                             // position. Used for drawing on the screen and in
 		                             // detecting collisions.
 
-		  // Constructors:
-
-		  public AsteroidsSprite() {
-
-		    this.shape = new Polygon();
-		    this.active = false;
-		    this.angle = 0.0;
-		    this.deltaAngle = 0.0;
-		    this.x = 0.0;
-		    this.y = 0.0;
-		    this.deltaX = 0.0;
-		    this.deltaY = 0.0;
-		    this.sprite = new Polygon();
-		  }
-
-	}
 	// Copyright information.
 
 	  String copyName = "Asteroids";
@@ -137,6 +125,7 @@ public class Framework extends Applet {
 
 	  // Sprite objects.
 
+	/*
 	  AsteroidsSprite   ship;
 	  AsteroidsSprite   fwdThruster, revThruster;
 	  AsteroidsSprite   ufo;
@@ -145,6 +134,7 @@ public class Framework extends Applet {
 	  AsteroidsSprite[] asteroids  = new AsteroidsSprite[MAX_ROCKS];
 	  AsteroidsSprite[] explosions = new AsteroidsSprite[MAX_SCRAP];
 
+*/
 	  // Ship data.
 
 	  int shipsLeft;       // Number of ships left in game, including current one.
@@ -213,7 +203,7 @@ public class Framework extends Applet {
 	  // Data for the screen font.
 
 	  Font font      = new Font("Helvetica", Font.BOLD, 12);
-	  FontMetrics fm = getFontMetrics(font);
+	  FontMetrics fm = getFontMetrics(font); // TODO: 16/03/2017 fix
 	  int fontWidth  = fm.getMaxAdvance();
 	  int fontHeight = fm.getHeight();
 	  
@@ -271,7 +261,7 @@ public class Framework extends Applet {
 		    return wrapped;
 		  }
 
-	  public boolean isColliding(AsteroidsSprite s) {
+	  public boolean isColliding(Framework s) {
 
 		    int i;
 

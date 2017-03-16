@@ -1,3 +1,7 @@
+package Domain;
+
+import Domain.Main;
+
 import java.applet.AudioClip;
 import java.awt.Polygon;
 

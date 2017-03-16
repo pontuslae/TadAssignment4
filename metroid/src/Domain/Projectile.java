@@ -46,15 +46,6 @@ class Photon extends Projectile {
 
 class Missle extends Projectile {
 
-	// missle.active = true; Should be in framework
-	double angle = 0.0;
-	double deltaAngle = 0.0;
-	// missle.x = ufo.x; Should be in framework I think.
-	// missle.y = ufo.y;
-	// missle.deltaX = 0.0;
-	// missle.deltaY = 0.0;
-    // missle.render();
-	// missleCounter = MISSLE_COUNT;
     boolean misslePlaying = true;
 
 	private Ship ship; // Target
@@ -93,9 +84,9 @@ class Missle extends Projectile {
 						hyperCounter <= 0 && ship.isColliding(missle)) {
 					if (sound)
 						crashSound.play();
-					explode(ship);
-					stopShip();
-					stopUfo();
+					ship.explode(ship);
+					ship.stopShip();
+					ship.stopUfo();
 					stopMissle();
 				}
 			}
