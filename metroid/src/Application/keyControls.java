@@ -1,7 +1,10 @@
+package Application;
+
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 
-public class keyControls {
+public class keyControls implements KeyListener{
 
 		// Key flags.
 		public static boolean left  = false;
