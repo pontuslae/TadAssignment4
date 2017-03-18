@@ -38,9 +38,9 @@ public class Asteroid {
 	  int   explosionIndex;                         // Next available explosion sprite.
 	  
 	  //Arrays
-	  Framework[] photons    = new Framework[MAX_SHOTS];
-	 public static Framework[] asteroids  = new Framework[MAX_ROCKS];
-	 static Framework[] explosions = new Framework[MAX_SCRAP];
+	  public static Framework[] photons    = new Framework[MAX_SHOTS];
+	  public static Framework[] asteroids  = new Framework[MAX_ROCKS];
+	  public static Framework[] explosions = new Framework[MAX_SCRAP];
 	  // Sound clips.
 
 	  AudioClip crashSound;

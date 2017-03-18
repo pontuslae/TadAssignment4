@@ -161,7 +161,7 @@ public class Framework extends Applet {
 	// Missle data.
 
 
-	int missleCounter;    // Counter for life of missle.
+	public int missleCounter;    // Counter for life of missle.
 
 
 	// Asteroid data.

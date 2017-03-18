@@ -84,8 +84,8 @@ public class Frame extends Framework {
 
         offGraphics.setColor(Color.white);
         for (i = 0; i < Projectile.MAX_SHOTS; i++)
-            if (photons[i].active)
-                offGraphics.drawPolygon(photons[i].sprite);
+            if (Asteroid.photons[i].active)
+                offGraphics.drawPolygon(Asteroid.photons[i].sprite);
 
         // Draw the guided missle, counter is used to quickly fade color to black
         // when near expiration.
@@ -95,7 +95,7 @@ public class Frame extends Framework {
         if (missle.active) {
             offGraphics.drawPolygon(missle.sprite);
             offGraphics.drawLine(missle.sprite.xpoints[missle.sprite.npoints - 1], missle.sprite.ypoints[missle.sprite.npoints - 1],
-                    missle.sprite.xpoints[0], missle.sprite.ypoints[0]);
+                   missle.sprite.xpoints[0], missle.sprite.ypoints[0]);
         }
 
         // Draw the asteroids.
@@ -117,12 +117,12 @@ public class Frame extends Framework {
         if (Saucer.ufo.active) {
             if (detail) {
                 offGraphics.setColor(Color.black);
-                offGraphics.fillPolygon(ufo.sprite);
+                offGraphics.fillPolygon(Saucer.ufo.sprite);
             }
             offGraphics.setColor(Color.white);
-            offGraphics.drawPolygon(ufo.sprite);
-            offGraphics.drawLine(ufo.sprite.xpoints[ufo.sprite.npoints - 1], ufo.sprite.ypoints[ufo.sprite.npoints - 1],
-                    ufo.sprite.xpoints[0], ufo.sprite.ypoints[0]);
+            offGraphics.drawPolygon(Saucer.ufo.sprite);
+            offGraphics.drawLine(Saucer.ufo.sprite.xpoints[Saucer.ufo.sprite.npoints - 1], Saucer.ufo.sprite.ypoints[Saucer.ufo.sprite.npoints - 1],
+                    Saucer.ufo.sprite.xpoints[0], Saucer.ufo.sprite.ypoints[0]);
         }
 
         // Draw the ship, counter is used to fade color to white on hyperspace.
@@ -131,26 +131,26 @@ public class Frame extends Framework {
         if (Ship.ship.active) {
             if (detail && hyperCounter == 0) {
                 offGraphics.setColor(Color.black);
-                offGraphics.fillPolygon(ship.sprite);
+                offGraphics.fillPolygon(Ship.ship.sprite);
             }
             offGraphics.setColor(new Color(c, c, c));
-            offGraphics.drawPolygon(ship.sprite);
-            offGraphics.drawLine(ship.sprite.xpoints[ship.sprite.npoints - 1], ship.sprite.ypoints[ship.sprite.npoints - 1],
-                    ship.sprite.xpoints[0], ship.sprite.ypoints[0]);
+            offGraphics.drawPolygon(Ship.ship.sprite);
+            offGraphics.drawLine(Ship.ship.sprite.xpoints[Ship.ship.sprite.npoints - 1], Ship.ship.sprite.ypoints[Ship.ship.sprite.npoints - 1],
+                    Ship.ship.sprite.xpoints[0], Ship.ship.sprite.ypoints[0]);
 
             // Draw thruster exhaust if thrusters are on. Do it randomly to get a
             // flicker effect.
 
             if (!paused && detail && Math.random() < 0.5) {
                 if (keyControls.up) {
-                    offGraphics.drawPolygon(fwdThruster.sprite);
-                    offGraphics.drawLine(fwdThruster.sprite.xpoints[fwdThruster.sprite.npoints - 1], fwdThruster.sprite.ypoints[fwdThruster.sprite.npoints - 1],
-                            fwdThruster.sprite.xpoints[0], fwdThruster.sprite.ypoints[0]);
+                    offGraphics.drawPolygon(Ship.fwdThruster.sprite);
+                    offGraphics.drawLine(Ship.fwdThruster.sprite.xpoints[Ship.fwdThruster.sprite.npoints - 1], Ship.fwdThruster.sprite.ypoints[Ship.fwdThruster.sprite.npoints - 1],
+                            Ship.fwdThruster.sprite.xpoints[0], Ship.fwdThruster.sprite.ypoints[0]);
                 }
                 if (keyControls.down) {
-                    offGraphics.drawPolygon(revThruster.sprite);
-                    offGraphics.drawLine(revThruster.sprite.xpoints[revThruster.sprite.npoints - 1], revThruster.sprite.ypoints[revThruster.sprite.npoints - 1],
-                            revThruster.sprite.xpoints[0], revThruster.sprite.ypoints[0]);
+                    offGraphics.drawPolygon(Ship.revThruster.sprite);
+                    offGraphics.drawLine(Ship.revThruster.sprite.xpoints[Ship.revThruster.sprite.npoints - 1], Ship.revThruster.sprite.ypoints[Ship.revThruster.sprite.npoints - 1],
+                            Ship.revThruster.sprite.xpoints[0], Ship.revThruster.sprite.ypoints[0]);
                 }
             }
         }
@@ -158,10 +158,10 @@ public class Frame extends Framework {
         // Draw any explosion debris, counters are used to fade color to black.
 
         for (i = 0; i < MAX_SCRAP; i++)
-            if (explosions[i].active) {
+            if (Asteroid.explosions[i].active) {
                 c = (255 / SCRAP_COUNT) * explosionCounter [i];
                 offGraphics.setColor(new Color(c, c, c));
-                offGraphics.drawPolygon(explosions[i].sprite);
+                offGraphics.drawPolygon(Asteroid.explosions[i].sprite);
             }
 
         // Display status and messages.

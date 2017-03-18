@@ -7,8 +7,10 @@ import static Application.keyControls.*;
  * Created by tim on 3/16/2017.
  */
 public class Ship extends UFO {
-    Framework ship;
-    Framework fwdThruster, revThruster;
+
+    public static Framework ship;
+    public static Framework fwdThruster, revThruster;
+
 
     @Override
     public void draw(){
