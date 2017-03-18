@@ -1,5 +1,6 @@
 package Domain;
 
+import Application.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Dimension;
@@ -25,12 +26,12 @@ public class Framework extends Applet {
 	static int height;
 
 	Polygon shape = new Polygon();;             // Base sprite shape, centered at the origin (0,0).
-	boolean active = false;            // Active flag.
+	public static boolean active = false;            // Active flag.
 	double  angle = 0.0;             // Current angle of rotation.
 	double  deltaAngle = 0.0;        // Amount to change the rotation angle.
 	double  x = 0.0, y = 0.0;              // Current position on screen.
 	double  deltaX = 0.0, deltaY = 0.0;    // Amount to change the screen position.
-	Polygon sprite = new Polygon();            // Final location and shape of sprite after
+	public Polygon sprite = new Polygon();            // Final location and shape of sprite after
 	// applying rotation and translation to get screen
 	// position. Used for drawing on the screen and in
 	// detecting collisions.
@@ -38,11 +39,11 @@ public class Framework extends Applet {
 	// Copyright information.
 
 
-	String copyName = "Asteroids";
-	String copyVers = "Version 1.3";
-	String copyInfo = "Copyright 1998-2001 by Mike Hall";
-	static String copyLink = "http://www.brainjar.com";
-	String copyText = copyName + '\n' + copyVers + '\n'
+	public String copyName = "Asteroids";
+	public String copyVers = "Version 1.3";
+	public String copyInfo = "Copyright 1998-2001 by Mike Hall";
+	public static String copyLink = "http://www.brainjar.com";
+	public String copyText = copyName + '\n' + copyVers + '\n'
 			+ copyInfo + '\n' + copyLink;
 
 
@@ -59,11 +60,11 @@ public class Framework extends Applet {
 			Math.round(1000 / DELAY);
 
 	static final int MAX_SHOTS =  8;          // Maximum number of sprites
-	static final int MAX_ROCKS =  8;          // for photons, asteroids and
-	static final int MAX_SCRAP = 40;          // explosions.
+	public static final int MAX_ROCKS =  8;          // for photons, asteroids and
+	public static final int MAX_SCRAP = 40;          // explosions.
 
-	static final int SCRAP_COUNT  = 2 * FPS;  // Timer counter starting values
-	static final int HYPER_COUNT  = 3 * FPS;  // calculated using number of
+	public static final int SCRAP_COUNT  = 2 * FPS;  // Timer counter starting values
+	public static final int HYPER_COUNT  = 3 * FPS;  // calculated using number of
 	static final int MISSLE_COUNT = 4 * FPS;  // seconds x frames per second.
 	static final int STORM_PAUSE  = 2 * FPS;
 
@@ -139,9 +140,9 @@ public class Framework extends Applet {
 	// Domain.Ship data.
 
 
-	int shipsLeft;       // Number of ships left in game, including current one.
+	public int shipsLeft;       // Number of ships left in game, including current one.
 	int shipCounter;     // Timer counter for ship explosion.
-	static int hyperCounter;    // Timer counter for hyperspace.
+	public static int hyperCounter;    // Timer counter for hyperspace.
 
 
 	// Photon data.
@@ -173,7 +174,7 @@ public class Framework extends Applet {
 	// Explosion data.
 
 
-	int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
+	public int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	int   explosionIndex;                         // Next available explosion sprite.
 
 	// Sound clips.
@@ -195,8 +196,8 @@ public class Framework extends Applet {
 
 	// Counter and total used to track the loading of the sound clips.
 
-	int clipTotal   = 0;
-	int clipsLoaded = 0;
+	public int clipTotal   = 0;
+	public int clipsLoaded = 0;
 
 
 	// Off screen image.
@@ -303,25 +304,25 @@ public class Framework extends Applet {
 			explosionIndex++;
 			if (explosionIndex >= MAX_SCRAP)
 				explosionIndex = 0;
-			explosions[explosionIndex].active = true;
-			explosions[explosionIndex].shape = new Polygon();
+			Asteroid.explosions[explosionIndex].active = true;
+			Asteroid.explosions[explosionIndex].shape = new Polygon();
 			j = i + 1;
 			if (j >= s.sprite.npoints)
 				j -= s.sprite.npoints;
 			cx = (int) ((s.shape.xpoints[i] + s.shape.xpoints[j]) / 2);
 			cy = (int) ((s.shape.ypoints[i] + s.shape.ypoints[j]) / 2);
-			explosions[explosionIndex].shape.addPoint(
+			Asteroid.explosions[explosionIndex].shape.addPoint(
 					s.shape.xpoints[i] - cx,
 					s.shape.ypoints[i] - cy);
-			explosions[explosionIndex].shape.addPoint(
+			Asteroid.explosions[explosionIndex].shape.addPoint(
 					s.shape.xpoints[j] - cx,
 					s.shape.ypoints[j] - cy);
-			explosions[explosionIndex].x = s.x + cx;
-			explosions[explosionIndex].y = s.y + cy;
-			explosions[explosionIndex].angle = s.angle;
-			explosions[explosionIndex].deltaAngle = 4 * (Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN);
-			explosions[explosionIndex].deltaX = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaX) / 2;
-			explosions[explosionIndex].deltaY = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaY) / 2;
+			Asteroid.explosions[explosionIndex].x = s.x + cx;
+			Asteroid.explosions[explosionIndex].y = s.y + cy;
+			Asteroid.explosions[explosionIndex].angle = s.angle;
+			Asteroid.explosions[explosionIndex].deltaAngle = 4 * (Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN);
+			Asteroid.explosions[explosionIndex].deltaX = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaX) / 2;
+			Asteroid.explosions[explosionIndex].deltaY = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaY) / 2;
 			explosionCounter[explosionIndex] = SCRAP_COUNT;
 		}
 	}

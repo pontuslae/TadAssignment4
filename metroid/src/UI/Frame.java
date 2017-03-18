@@ -1,8 +1,11 @@
 package UI;
 
+import Domain.Asteroid;
 import Domain.Framework;
 import Domain.Projectile;
+import Domain.Ship;
 import Application.keyControls;
+import Domain.Saucer;
 
 import java.applet.Applet;
 import java.awt.*;
@@ -98,20 +101,20 @@ public class Frame extends Framework {
         // Draw the asteroids.
 
         for (i = 0; i < MAX_ROCKS; i++)
-            if (asteroids[i].active) {
+            if (Asteroid.asteroids[i].active) {
                 if (detail) {
                     offGraphics.setColor(Color.black);
-                    offGraphics.fillPolygon(asteroids[i].sprite);
+                    offGraphics.fillPolygon(Asteroid.asteroids[i].sprite);
                 }
                 offGraphics.setColor(Color.white);
-                offGraphics.drawPolygon(asteroids[i].sprite);
-                offGraphics.drawLine(asteroids[i].sprite.xpoints[asteroids[i].sprite.npoints - 1], asteroids[i].sprite.ypoints[asteroids[i].sprite.npoints - 1],
-                        asteroids[i].sprite.xpoints[0], asteroids[i].sprite.ypoints[0]);
+                offGraphics.drawPolygon(Asteroid.asteroids[i].sprite);
+                offGraphics.drawLine(Asteroid.asteroids[i].sprite.xpoints[Asteroid.asteroids[i].sprite.npoints - 1], Asteroid.asteroids[i].sprite.ypoints[Asteroid.asteroids[i].sprite.npoints - 1],
+                        Asteroid.asteroids[i].sprite.xpoints[0], Asteroid.asteroids[i].sprite.ypoints[0]);
             }
 
         // Draw the flying saucer.
 
-        if (ufo.active) {
+        if (Saucer.ufo.active) {
             if (detail) {
                 offGraphics.setColor(Color.black);
                 offGraphics.fillPolygon(ufo.sprite);
@@ -125,7 +128,7 @@ public class Frame extends Framework {
         // Draw the ship, counter is used to fade color to white on hyperspace.
 
         c = 255 - (255 / HYPER_COUNT) * hyperCounter;
-        if (ship.active) {
+        if (Ship.ship.active) {
             if (detail && hyperCounter == 0) {
                 offGraphics.setColor(Color.black);
                 offGraphics.fillPolygon(ship.sprite);
