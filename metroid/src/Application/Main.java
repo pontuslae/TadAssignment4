@@ -39,8 +39,8 @@ public class Main extends Applet implements Runnable {
 	public int ufoCounter;       // Timer counter used to track each flying saucer pass.
 
 	// Thread control variables.
-	Thread loadThread;
-	Thread loopThread;
+	public static Thread loadThread;
+	public static Thread loopThread;
 
 	public void run() {
 
