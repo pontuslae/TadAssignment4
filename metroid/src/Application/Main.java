@@ -104,10 +104,7 @@ public class Main implements Runnable {
 			loopThread.stop();
 			loopThread = null;
 		}
-		if (loadThread != null) {
-			loadThread.stop();
-			loadThread = null;
-		}
+
 	}
 
 	public void initGame() {
@@ -118,12 +115,12 @@ public class Main implements Runnable {
 		// asteroidsSpeed = MIN_ROCK_SPEED;
 		newShipScore = NEW_SHIP_POINTS;
 		newUfoScore = NEW_UFO_POINTS;
-		//initShip();
-		//initPhotons();
-		//stopUfo();
-		//stopMissle();
-		//initAsteroids();
-		//initExplosions();
+		ship.init();
+		initPhotons();
+		saucer.stop();
+		stopMissle();
+		initAsteroids();
+		initExplosions();
 		playing = true;
 		paused = false;
 		//photonTime = System.currentTimeMillis();
