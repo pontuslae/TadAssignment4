@@ -117,14 +117,6 @@ public class Framework extends Applet {
 	public int     numStars;
 	public Point[] stars;
 
-
-	// Game data.
-
-	public static int score;
-	public int highScore;
-	public int newShipScore;
-	public int newUfoScore;
-
 	// Domain.Ship data.
 
 

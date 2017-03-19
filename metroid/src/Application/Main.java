@@ -14,16 +14,16 @@ public class Main implements Runnable {
 	// Flags for game state and options.
 
 	public static boolean loaded = false;
-	public boolean paused;
+	public static boolean paused;
 	public static boolean playing;
 	public static boolean sound;
-	
+
 	// Game data.
 
 	public static int score;
 	public static int highScore;
-	public int newShipScore;
-	public int newUfoScore;
+	public static int newShipScore;
+	public static int newUfoScore;
 	
 	public static int shipsLeft;       // Number of ships left in game, including current one.
 	public int shipCounter;     // Timer counter for ship explosion.
@@ -128,10 +128,9 @@ public class Main implements Runnable {
 			loopThread.stop();
 			loopThread = null;
 		}
-
 	}
 
-	public void initGame() {
+	public static void initGame() {
 		// Initialize game data and sprites.
 
 		score = 0;
@@ -144,7 +143,7 @@ public class Main implements Runnable {
 		saucer.stop();
 		for (Domain.Missle e:Framework.missles)
 			e.stopMissle();
-		initAsteroids(); // Not mine
+		// initAsteroids();// TODO: 19/03/2017 @Anthony
 		Explosion.initExplosions(); // Not mine
 		playing = true;
 		paused = false;
