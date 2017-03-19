@@ -1,6 +1,8 @@
 package Application;
 
 import Domain.Framework;
+import Foundation.Audio;
+
 import static Application.Main.*;
 import static Domain.Explosion.detail;
 import static Foundation.Audio.*;
@@ -35,7 +37,7 @@ public class KeyControls extends Framework implements KeyListener{
 			down = true;
 
 		if ((up || down) && ship.active && !thrustersPlaying) {
-			if (sound && !paused)
+			if (Audio.sound && !paused)
 				thrustersSound.loop();
 			thrustersPlaying = true;
 		}
@@ -44,7 +46,7 @@ public class KeyControls extends Framework implements KeyListener{
 
 		int photonIndex = 0;
 		if (e.getKeyChar() == ' ' && ship.active) {
-			if (sound & !paused)
+			if (Audio.sound & !paused)
 				fireSound.play();
 			photonTime = System.currentTimeMillis();
 			photonIndex++;
@@ -64,11 +66,11 @@ public class KeyControls extends Framework implements KeyListener{
 		// 'H' key: warp ship into hyperspace by moving to a random location and
 		// starting counter.
 
-		if (c == 'h' && ship.active && Framework.hyperCounter <= 0) {
+		if (c == 'h' && ship.active && Main.hyperCounter <= 0) {
 			ship.x = Math.random() * Framework.width;
 			ship.y = Math.random() * Framework.height;
-			Framework.hyperCounter = Framework.HYPER_COUNT;
-			if (sound & !paused)
+			Main.hyperCounter = Framework.HYPER_COUNT;
+			if (Audio.sound & !paused)
 				warpSound.play();
 		}
 
@@ -77,11 +79,11 @@ public class KeyControls extends Framework implements KeyListener{
 
 		if (c == 'p') {
 			if (paused) {
-				if (sound && misslePlaying)
+				if (Audio.sound && misslePlaying)
 					missleSound.loop();
-				if (sound && saucerPlaying)
+				if (Audio.sound && saucerPlaying)
 					saucerSound.loop();
-				if (sound && thrustersPlaying)
+				if (Audio.sound && thrustersPlaying)
 					thrustersSound.loop();
 			}
 			else {
@@ -98,7 +100,7 @@ public class KeyControls extends Framework implements KeyListener{
 		// 'M' key: toggle sound on or off and stop any looping sound clips.
 
 		if (c == 'm' && loaded) {
-			if (sound) {
+			if (Audio.sound) {
 				crashSound.stop();
 				explosionSound.stop();
 				fireSound.stop();
@@ -115,7 +117,7 @@ public class KeyControls extends Framework implements KeyListener{
 				if (thrustersPlaying && !paused)
 					thrustersSound.loop();
 			}
-			sound = !sound;
+			Audio.sound = !Audio.sound;
 		}
 
 		// 'D' key: toggle graphics detail on or off.
