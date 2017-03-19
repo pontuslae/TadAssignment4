@@ -76,7 +76,7 @@ public class Saucer extends UFO {
                     if (Asteroid.photons[i].active && isColliding(Asteroid.photons[i])) {
                         if (sound)
                             crashSound.play();
-                        explode(this);
+                        Explosion.explode(this);
                         stop();
                         score += Framework.UFO_POINTS;
                     }

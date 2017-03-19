@@ -54,7 +54,7 @@ public class Framework extends Applet {
 	// Constants
 
 
-	public static final int DELAY = 20;             // Milliseconds between screen and
+	static final int DELAY = 20;             // Milliseconds between screen and
 	static final int FPS   =                 // the resulting frame rate.
 			Math.round(1000 / DELAY);
 
@@ -121,24 +121,27 @@ public class Framework extends Applet {
 	// Game data.
 
 	public static int score;
-	public static int highScore;
-	public static int newShipScore;
-	public static int newUfoScore;
+	public int highScore;
+	public int newShipScore;
+	public int newUfoScore;
 
 
 	// Flags for game state and options.
 
-	public static boolean loaded = false;
-	public static boolean paused;
-	public static boolean playing;
+	public boolean loaded = false;
+	public boolean paused;
+	public boolean playing;
 	public static boolean sound;
 	public static boolean detail;
+
+
+
 
 	// Domain.Ship data.
 
 
-	public static int shipsLeft;       // Number of ships left in game, including current one.
-	public static int shipCounter;     // Timer counter for ship explosion.
+	public int shipsLeft;       // Number of ships left in game, including current one.
+	public int shipCounter;     // Timer counter for ship explosion.
 	public static int hyperCounter;    // Timer counter for hyperspace.
 
 
@@ -150,7 +153,7 @@ public class Framework extends Applet {
 
 	// Flying saucer data.
 
-	public static int ufoPassesLeft;    // Counter for number of flying saucer passes.
+	public int ufoPassesLeft;    // Counter for number of flying saucer passes.
 	public int ufoCounter;       // Timer counter used to track each flying saucer pass.
 
 
@@ -168,15 +171,9 @@ public class Framework extends Applet {
 	// Asteroid data.
 
 	public boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
-	public static int       asteroidsCounter;                            // Break-time counter.
+	public int       asteroidsCounter;                            // Break-time counter.
 	public double    asteroidsSpeed;                              // Asteroid speed.
-	public static int       asteroidsLeft;                               // Number of active asteroids.
-
-	// Explosion data.
-
-
-	public int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
-	public int   explosionIndex;                         // Next available explosion sprite.
+	public int       asteroidsLeft;                               // Number of active asteroids.
 
 
 	// Off screen image.

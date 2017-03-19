@@ -7,24 +7,43 @@ import static Domain.Framework.*;
 import java.applet.AudioClip;
 import java.awt.Polygon;
 
+import Foundation.Audio;
+
 public class Asteroid {
 
+	static final int DELAY = 20;             // Milliseconds between screen and
+	static final int FPS   =                 // the resulting frame rate.
+			Math.round(1000 / DELAY);
+
+	static final int MAX_SHOTS =  8;          // Maximum number of sprites
+	static final int MAX_ROCKS =  8;          // for photons, asteroids and
+	static final int MAX_SCRAP = 40;          // explosions.
+
+	static final int SCRAP_COUNT  = 2 * FPS;  // Timer counter starting values
+	static final int HYPER_COUNT  = 3 * FPS;  // calculated using number of
+	static final int MISSLE_COUNT = 4 * FPS;  // seconds x frames per second.
+	static final int STORM_PAUSE  = 2 * FPS;
+
+	static final int    MIN_ROCK_SIDES =   6; // Ranges for asteroid shape, size
+	static final int    MAX_ROCK_SIDES =  16; // speed and rotation.
+	static final int    MIN_ROCK_SIZE  =  20;
+	static final int    MAX_ROCK_SIZE  =  40;
+	static final double MIN_ROCK_SPEED =  40.0 / FPS;
+	static final double MAX_ROCK_SPEED = 240.0 / FPS;
+	static final double MAX_ROCK_SPIN  = Math.PI / FPS;
 	boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
-	int       asteroidsCounter;                            // Break-time counter.
-	double    asteroidsSpeed;                              // Asteroid speed.
-	int       asteroidsLeft;                               // Number of active asteroids.
+	int asteroidsCounter;                            // Break-time counter.
+	double asteroidsSpeed;                              // Asteroid speed.
+	int asteroidsLeft;                               // Number of active asteroids.
 
-	// Explosion data.
 
-	int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
-	int   explosionIndex;                         // Next available explosion sprite.
+	//Arrays
+	public static Framework[] photons    = new Framework[MAX_SHOTS];
+	public static Framework[] asteroids  = new Framework[MAX_ROCKS];
 
 	// Sound clips.
 
 	AudioClip crashSound;
-	AudioClip explosionSound;
-
-
 
 	public void initAsteroids() {
 
@@ -154,8 +173,8 @@ public class Asteroid {
 						asteroids[i].active = false;
 						photons[j].active = false;
 						if (Framework.sound)
-							explosionSound.play();
-						explode(asteroids[i]);
+							Audio.explosionSound.play();
+						Explosion.explode(asteroids[i]);
 						if (!asteroidIsSmall[i]) {
 							score += Framework.BIG_POINTS;
 							initSmallAsteroids(i);
@@ -170,7 +189,7 @@ public class Asteroid {
 						asteroids[i].active && asteroids[i].isColliding(ship)) {
 					if (Framework.sound)
 						crashSound.play();
-					explode(ship);
+					Explosion.explode(ship);
 					saucer.stop();
 					saucer.stop();
 					for (Domain.Missle e:Framework.missles)
@@ -179,71 +198,6 @@ public class Asteroid {
 			}
 	}
 
-	public void initExplosions() {
-
-		int i;
-
-		for (i = 0; i < MAX_SCRAP; i++) {
-			explosions[i].shape = new Polygon();
-			explosions[i].active = false;
-			explosionCounter[i] = 0;
-		}
-		explosionIndex = 0;
-	}
-
-	public void explode(Framework s) {
-
-		int c, i, j;
-		int cx, cy;
-
-		// Create sprites for explosion animation. The each individual line segment
-		// of the given sprite is used to create a new sprite that will move
-		// outward  from the sprite's original position with a random rotation.
-
-		s.render();
-		c = 2;
-		if (Framework.detail || s.sprite.npoints < 6)
-			c = 1;
-		for (i = 0; i < s.sprite.npoints; i += c) {
-			explosionIndex++;
-			if (explosionIndex >= MAX_SCRAP)
-				explosionIndex = 0;
-			explosions[explosionIndex].active = true;
-			explosions[explosionIndex].shape = new Polygon();
-			j = i + 1;
-			if (j >= s.sprite.npoints)
-				j -= s.sprite.npoints;
-			cx = (int) ((s.shape.xpoints[i] + s.shape.xpoints[j]) / 2);
-			cy = (int) ((s.shape.ypoints[i] + s.shape.ypoints[j]) / 2);
-			explosions[explosionIndex].shape.addPoint(
-					s.shape.xpoints[i] - cx,
-					s.shape.ypoints[i] - cy);
-			explosions[explosionIndex].shape.addPoint(
-					s.shape.xpoints[j] - cx,
-					s.shape.ypoints[j] - cy);
-			explosions[explosionIndex].x = s.x + cx;
-			explosions[explosionIndex].y = s.y + cy;
-			explosions[explosionIndex].angle = s.angle;
-			explosions[explosionIndex].deltaAngle = 4 * (Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN);
-			explosions[explosionIndex].deltaX = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaX) / 2;
-			explosions[explosionIndex].deltaY = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaY) / 2;
-			explosionCounter[explosionIndex] = SCRAP_COUNT;
-		}
-	}
-
-	public void updateExplosions() {
-
-		int i;
-		// Move any active explosion debris. Stop explosion when its counter has
-		// expired.
-
-		for (i = 0; i < MAX_SCRAP; i++)
-			if (explosions[i].active) {
-				explosions[i].advance();
-				explosions[i].render();
-				if (--explosionCounter[i] < 0)
-					explosions[i].active = false;
-			}
-	}
+	
 
 }
