@@ -1,6 +1,7 @@
 package UI;
 
 import Domain.Asteroid;
+import Domain.Explosion;
 import Domain.Framework;
 import Domain.Projectile;
 import Domain.Ship;
@@ -124,9 +125,9 @@ public class Frame extends Framework {
 
         // Draw the ship, counter is used to fade color to white on hyperspace.
 
-        c = 255 - (255 / HYPER_COUNT) * hyperCounter;
+        c = 255 - (255 / HYPER_COUNT) * Main.hyperCounter;
         if (Main.ship.active) {
-            if (detail && hyperCounter == 0) {
+            if (detail && Main.hyperCounter == 0) {
                 offGraphics.setColor(Color.black);
                 offGraphics.fillPolygon(Main.ship.sprite);
             }
@@ -155,8 +156,8 @@ public class Frame extends Framework {
         // Draw any explosion debris, counters are used to fade color to black.
 
         for (i = 0; i < MAX_SCRAP; i++)
-            if (Asteroid.explosions[i].active) {
-                c = (255 / SCRAP_COUNT) * explosionCounter [i];
+            if (Explosion.explosions[i].active) {
+                c = (255 / SCRAP_COUNT) * Explosion.explosionCounter [i];
                 offGraphics.setColor(new Color(c, c, c));
                 offGraphics.drawPolygon(Asteroid.explosions[i].sprite);
             }

@@ -16,7 +16,7 @@ public class Main implements Runnable {
 	public static boolean loaded = false;
 	public static boolean paused;
 	public static boolean playing;
-	public static boolean sound;
+	//public static boolean sound;
 
 	// Game data.
 

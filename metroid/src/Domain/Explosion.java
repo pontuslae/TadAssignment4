@@ -12,12 +12,12 @@ public class Explosion {
 	static final int MAX_SCRAP = 40;          // Maximum number of sprites explosions.
 	// Explosion data.
 
-	static int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
+	public static int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	static int   explosionIndex;                         // Next available explosion sprite.
 	
 	public static boolean detail;
 
-	static Framework[] explosions = new Framework[MAX_SCRAP];
+	public static Framework[] explosions = new Framework[MAX_SCRAP];
 	// Sound clips.
 	AudioClip explosionSound;
 	
