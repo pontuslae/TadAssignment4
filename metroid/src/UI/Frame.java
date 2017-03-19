@@ -4,11 +4,10 @@ import Domain.Asteroid;
 import Domain.Framework;
 import Domain.Projectile;
 import Domain.Ship;
-import Application.keyControls;
+import Application.*;
 import Domain.Saucer;
 import Foundation.Audio;
 
-import java.applet.Applet;
 import java.awt.*;
 
 
@@ -112,40 +111,40 @@ public class Frame extends Framework {
 
         // Draw the flying saucer.
 
-        if (Saucer.ufo.active) {
+        if (Main.saucer.active) {
             if (detail) {
                 offGraphics.setColor(Color.black);
-                offGraphics.fillPolygon(Saucer.ufo.sprite);
+                offGraphics.fillPolygon(Main.saucer.sprite);
             }
             offGraphics.setColor(Color.white);
-            offGraphics.drawPolygon(Saucer.ufo.sprite);
-            offGraphics.drawLine(Saucer.ufo.sprite.xpoints[Saucer.ufo.sprite.npoints - 1], Saucer.ufo.sprite.ypoints[Saucer.ufo.sprite.npoints - 1],
-                    Saucer.ufo.sprite.xpoints[0], Saucer.ufo.sprite.ypoints[0]);
+            offGraphics.drawPolygon(Main.saucer.sprite);
+            offGraphics.drawLine(Main.saucer.sprite.xpoints[Main.saucer.sprite.npoints - 1], Main.saucer.sprite.ypoints[Main.saucer.sprite.npoints - 1],
+                    Main.saucer.sprite.xpoints[0], Main.saucer.sprite.ypoints[0]);
         }
 
         // Draw the ship, counter is used to fade color to white on hyperspace.
 
         c = 255 - (255 / HYPER_COUNT) * hyperCounter;
-        if (Ship.ship.active) {
+        if (Main.ship.active) {
             if (detail && hyperCounter == 0) {
                 offGraphics.setColor(Color.black);
-                offGraphics.fillPolygon(Ship.ship.sprite);
+                offGraphics.fillPolygon(Main.ship.sprite);
             }
             offGraphics.setColor(new Color(c, c, c));
-            offGraphics.drawPolygon(Ship.ship.sprite);
-            offGraphics.drawLine(Ship.ship.sprite.xpoints[Ship.ship.sprite.npoints - 1], Ship.ship.sprite.ypoints[Ship.ship.sprite.npoints - 1],
-                    Ship.ship.sprite.xpoints[0], Ship.ship.sprite.ypoints[0]);
+            offGraphics.drawPolygon(Main.ship.sprite);
+            offGraphics.drawLine(Main.ship.sprite.xpoints[Main.ship.sprite.npoints - 1], Main.ship.sprite.ypoints[Main.ship.sprite.npoints - 1],
+                    Main.ship.sprite.xpoints[0], Main.ship.sprite.ypoints[0]);
 
             // Draw thruster exhaust if thrusters are on. Do it randomly to get a
             // flicker effect.
 
             if (!paused && detail && Math.random() < 0.5) {
-                if (keyControls.up) {
+                if (KeyControls.up) {
                     offGraphics.drawPolygon(Ship.fwdThruster.sprite);
                     offGraphics.drawLine(Ship.fwdThruster.sprite.xpoints[Ship.fwdThruster.sprite.npoints - 1], Ship.fwdThruster.sprite.ypoints[Ship.fwdThruster.sprite.npoints - 1],
                             Ship.fwdThruster.sprite.xpoints[0], Ship.fwdThruster.sprite.ypoints[0]);
                 }
-                if (keyControls.down) {
+                if (KeyControls.down) {
                     offGraphics.drawPolygon(Ship.revThruster.sprite);
                     offGraphics.drawLine(Ship.revThruster.sprite.xpoints[Ship.revThruster.sprite.npoints - 1], Ship.revThruster.sprite.ypoints[Ship.revThruster.sprite.npoints - 1],
                             Ship.revThruster.sprite.xpoints[0], Ship.revThruster.sprite.ypoints[0]);

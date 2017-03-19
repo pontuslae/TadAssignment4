@@ -7,15 +7,15 @@ import java.net.URL;
 public class Audio {
 	static boolean sound;
 	int DELAY;
-	static int clipTotal = 0;
-	static int clipsLoaded = 0;
-	static AudioClip crashSound;
-	static AudioClip explosionSound;
-	static AudioClip fireSound;
-	static AudioClip missleSound;
-	static AudioClip saucerSound;
-	static AudioClip warpSound;
-	static AudioClip thrustersSound;
+	public static int clipTotal = 0;
+	public static int clipsLoaded = 0;
+	public static AudioClip crashSound;
+	public static AudioClip explosionSound;
+	public static AudioClip fireSound;
+	public static AudioClip missleSound;
+	public static AudioClip saucerSound;
+	public static AudioClip warpSound;
+	public static AudioClip thrustersSound;
 
 	// Sound clips.
 
