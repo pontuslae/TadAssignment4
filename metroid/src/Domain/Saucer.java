@@ -5,23 +5,23 @@ package Domain;
  */
 public class Saucer extends UFO {
 
-    public static Framework ufo;
+    //public static Framework ufo;
 
     @Override
     public void draw(){
         // Create shape for the flying saucer.
 
-        ufo = new Framework();
-        ufo.shape.addPoint(-15, 0);
-        ufo.shape.addPoint(-10, -5);
-        ufo.shape.addPoint(-5, -5);
-        ufo.shape.addPoint(-5, -8);
-        ufo.shape.addPoint(5, -8);
-        ufo.shape.addPoint(5, -5);
-        ufo.shape.addPoint(10, -5);
-        ufo.shape.addPoint(15, 0);
-        ufo.shape.addPoint(10, 5);
-        ufo.shape.addPoint(-10, 5);
+        //ufo = new Framework();
+        shape.addPoint(-15, 0);
+        shape.addPoint(-10, -5);
+        shape.addPoint(-5, -5);
+        shape.addPoint(-5, -8);
+        shape.addPoint(5, -8);
+        shape.addPoint(5, -5);
+        shape.addPoint(10, -5);
+        shape.addPoint(15, 0);
+        shape.addPoint(10, 5);
+        shape.addPoint(-10, 5);
     }
 
     @Override
@@ -31,20 +31,20 @@ public class Saucer extends UFO {
 
         // Randomly set flying saucer at left or right edge of the screen.
 
-        ufo.active = true;
-        ufo.x = -Framework.width / 2;
-        ufo.y = Math.random() * 2 * Framework.height - Framework.height;
+        active = true;
+        x = -Framework.width / 2;
+        y = Math.random() * 2 * Framework.height - Framework.height;
         angle = Math.random() * Math.PI / 4 - Math.PI / 2;
         speed = Framework.MAX_ROCK_SPEED / 2 + Math.random() * (Framework.MAX_ROCK_SPEED / 2);
-        ufo.deltaX = speed * -Math.sin(angle);
-        ufo.deltaY = speed *  Math.cos(angle);
+        deltaX = speed * -Math.sin(angle);
+        deltaY = speed *  Math.cos(angle);
         if (Math.random() < 0.5) {
-            ufo.x = Framework.width / 2;
-            ufo.deltaX = -ufo.deltaX;
+            x = Framework.width / 2;
+            deltaX = -deltaX;
         }
-        if (ufo.y > 0)
-            ufo.deltaY = ufo.deltaY;
-        ufo.render();
+        if (y > 0)
+            deltaY = deltaY;
+        render();
         saucerPlaying = true;
         if (sound)
             saucerSound.loop();
@@ -60,31 +60,31 @@ public class Saucer extends UFO {
         // Move the flying saucer and check for collision with a photon. Stop it
         // when its counter has expired.
 
-        if (ufo.active) {
+        if (active) {
             if (--counter <= 0) {
                 if (--ufoPassesLeft > 0)
-                    ufo.init();
+                    init();
                 else
-                    ufo.stop();
+                    stop();
             }
-            if (ufo.active) {
-                ufo.advance();
-                ufo.render();
+            if (active) {
+                advance();
+                render();
                 for (i = 0; i < Framework.MAX_SHOTS; i++)
-                    if (Asteroid.photons[i].active && ufo.isColliding(Asteroid.photons[i])) {
+                    if (Asteroid.photons[i].active && isColliding(Asteroid.photons[i])) {
                         if (sound)
                             crashSound.play();
-                        explode(ufo);
-                        ufo.stop();
+                        explode(this);
+                        stop();
                         score += Framework.UFO_POINTS;
                     }
 
                 // On occassion, fire a missle at the ship if the saucer is not too
                 // close to it.
 
-                d = (int) Math.max(Math.abs(ufo.x - ship.x), Math.abs(ufo.y - ship.y));
+                d = (int) Math.max(Math.abs(x - ship.x), Math.abs(y - ship.y));
                 if (ship.active && hyperCounter <= 0 &&
-                        ufo.active && !missle.active &&
+                        active && !missle.active &&
                         d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
                         Math.random() < Framework.MISSLE_PROBABILITY)
                     initMissle();
@@ -95,7 +95,7 @@ public class Saucer extends UFO {
     @Override
     public void stop() {
 
-        ufo.active = false;
+        active = false;
         counter = 0;
         ufoPassesLeft = 0;
         if (loaded)
