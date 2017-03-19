@@ -1,6 +1,7 @@
 package Domain;
 
 import Application.Main;
+import Foundation.*;
 
 /**
  * Created by tim on 3/16/2017.
@@ -47,9 +48,9 @@ public class Saucer extends UFO {
         if (y > 0)
             deltaY = deltaY;
         render();
-        saucerPlaying = true;
+        Audio.saucerPlaying = true;
         if (sound)
-            saucerSound.loop();
+        	Audio.saucerSound.loop();
         counter = (int) Math.abs(Framework.width / deltaX);
     }
 
@@ -75,7 +76,7 @@ public class Saucer extends UFO {
                 for (i = 0; i < Framework.MAX_SHOTS; i++)
                     if (Asteroid.photons[i].active && isColliding(Asteroid.photons[i])) {
                         if (sound)
-                            crashSound.play();
+                        	Audio.crashSound.play();
                         Explosion.explode(this);
                         stop();
                         score += Framework.UFO_POINTS;
@@ -101,7 +102,7 @@ public class Saucer extends UFO {
         counter = 0;
         ufoPassesLeft = 0;
         if (loaded)
-            saucerSound.stop();
-        saucerPlaying = false;
+        	Audio.saucerSound.stop();
+        Audio.saucerPlaying = false;
     }
 }
