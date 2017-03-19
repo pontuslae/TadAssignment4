@@ -46,7 +46,6 @@ public class Framework extends Applet {
 	public String copyText = copyName + '\n' + copyVers + '\n'
 			+ copyInfo + '\n' + copyLink;
 
-
 	// Thread control variables.
 
 	Thread loadThread;
@@ -72,8 +71,8 @@ public class Framework extends Applet {
 	static final int    MAX_ROCK_SIDES =  16; // speed and rotation.
 	static final int    MIN_ROCK_SIZE  =  20;
 	static final int    MAX_ROCK_SIZE  =  40;
-	static final double MIN_ROCK_SPEED =  40.0 / FPS;
-	static final double MAX_ROCK_SPEED = 240.0 / FPS;
+	public static final double MIN_ROCK_SPEED =  40.0 / FPS;
+	public static final double MAX_ROCK_SPEED = 240.0 / FPS;
 	static final double MAX_ROCK_SPIN  = Math.PI / FPS;
 
 	static final int MAX_SHIPS = 3;           // Starting number of ships for
@@ -177,36 +176,12 @@ public class Framework extends Applet {
 	public int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	int   explosionIndex;                         // Next available explosion sprite.
 
-	// Sound clips.
-
-	AudioClip crashSound;
-	AudioClip explosionSound;
-	AudioClip fireSound;
-	AudioClip missleSound;
-	AudioClip saucerSound;
-	AudioClip thrustersSound;
-	AudioClip warpSound;
-
-	// Flags for looping sound clips.
-
-	boolean thrustersPlaying;
-	boolean saucerPlaying;
-	boolean misslePlaying;
-
-
-	// Counter and total used to track the loading of the sound clips.
-
-	public int clipTotal   = 0;
-	public int clipsLoaded = 0;
-
 
 	// Off screen image.
 
 	Dimension offDimension;
 	Image     offImage;
 	Graphics  offGraphics;
-
-
 
 
 	// Data for the screen font.
@@ -286,47 +261,6 @@ public class Framework extends Applet {
 				return true;
 		return false;
 	}
-
-	public void explode(Framework s) {
-
-		int c, i, j;
-		int cx, cy;
-
-		// Create sprites for explosion animation. The each individual line segment
-		// of the given sprite is used to create a new sprite that will move
-		// outward  from the sprite's original position with a random rotation.
-
-		s.render();
-		c = 2;
-		if (Main.detail || s.sprite.npoints < 6)
-			c = 1;
-		for (i = 0; i < s.sprite.npoints; i += c) {
-			explosionIndex++;
-			if (explosionIndex >= MAX_SCRAP)
-				explosionIndex = 0;
-			Asteroid.explosions[explosionIndex].active = true;
-			Asteroid.explosions[explosionIndex].shape = new Polygon();
-			j = i + 1;
-			if (j >= s.sprite.npoints)
-				j -= s.sprite.npoints;
-			cx = (int) ((s.shape.xpoints[i] + s.shape.xpoints[j]) / 2);
-			cy = (int) ((s.shape.ypoints[i] + s.shape.ypoints[j]) / 2);
-			Asteroid.explosions[explosionIndex].shape.addPoint(
-					s.shape.xpoints[i] - cx,
-					s.shape.ypoints[i] - cy);
-			Asteroid.explosions[explosionIndex].shape.addPoint(
-					s.shape.xpoints[j] - cx,
-					s.shape.ypoints[j] - cy);
-			Asteroid.explosions[explosionIndex].x = s.x + cx;
-			Asteroid.explosions[explosionIndex].y = s.y + cy;
-			Asteroid.explosions[explosionIndex].angle = s.angle;
-			Asteroid.explosions[explosionIndex].deltaAngle = 4 * (Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN);
-			Asteroid.explosions[explosionIndex].deltaX = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaX) / 2;
-			Asteroid.explosions[explosionIndex].deltaY = (Math.random() * 2 * MAX_ROCK_SPEED - MAX_ROCK_SPEED + s.deltaY) / 2;
-			explosionCounter[explosionIndex] = SCRAP_COUNT;
-		}
-	}
-
 
 }
 

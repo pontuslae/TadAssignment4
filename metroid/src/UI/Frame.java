@@ -6,6 +6,7 @@ import Domain.Projectile;
 import Domain.Ship;
 import Application.keyControls;
 import Domain.Saucer;
+import Foundation.Audio;
 
 import java.applet.Applet;
 import java.awt.*;
@@ -45,15 +46,12 @@ public class Frame extends Framework {
     int newShipScore;
     int newUfoScore;
 
-
-
-
     /**
      * Method Section
      */
+    public Frame(){
 
-
-
+    }
     public void paint(Graphics g) {
         Dimension d = getSize();
         int i;
@@ -196,8 +194,8 @@ public class Frame extends Framework {
                 offGraphics.setColor(Color.black);
                 offGraphics.fillRect(x, y, w, h);
                 offGraphics.setColor(Color.gray);
-                if (clipTotal > 0)
-                    offGraphics.fillRect(x, y, (int) (w * clipsLoaded / clipTotal), h);
+                if (Audio.clipTotal > 0)
+                    offGraphics.fillRect(x, y, (int) (w * Audio.clipsLoaded / Audio.clipTotal), h);
                 offGraphics.setColor(Color.white);
                 offGraphics.drawRect(x, y, w, h);
                 offGraphics.drawString(s, x + 2 * fontWidth, y + fm.getMaxAscent());
