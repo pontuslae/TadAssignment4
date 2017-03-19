@@ -54,7 +54,7 @@ public class Framework extends Applet {
 	// Constants
 
 
-	static final int DELAY = 20;             // Milliseconds between screen and
+	public static final int DELAY = 20;             // Milliseconds between screen and
 	static final int FPS   =                 // the resulting frame rate.
 			Math.round(1000 / DELAY);
 
@@ -121,9 +121,9 @@ public class Framework extends Applet {
 	// Game data.
 
 	public static int score;
-	public int highScore;
-	public int newShipScore;
-	public int newUfoScore;
+	public static int highScore;
+	public static int newShipScore;
+	public static int newUfoScore;
 
 
 	// Flags for game state and options.
@@ -140,8 +140,8 @@ public class Framework extends Applet {
 	// Domain.Ship data.
 
 
-	public int shipsLeft;       // Number of ships left in game, including current one.
-	public int shipCounter;     // Timer counter for ship explosion.
+	public static int shipsLeft;       // Number of ships left in game, including current one.
+	public static int shipCounter;     // Timer counter for ship explosion.
 	public static int hyperCounter;    // Timer counter for hyperspace.
 
 
@@ -153,7 +153,7 @@ public class Framework extends Applet {
 
 	// Flying saucer data.
 
-	public int ufoPassesLeft;    // Counter for number of flying saucer passes.
+	public static int ufoPassesLeft;    // Counter for number of flying saucer passes.
 	public int ufoCounter;       // Timer counter used to track each flying saucer pass.
 
 
@@ -171,9 +171,9 @@ public class Framework extends Applet {
 	// Asteroid data.
 
 	public boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
-	public int       asteroidsCounter;                            // Break-time counter.
+	public static int       asteroidsCounter;                            // Break-time counter.
 	public double    asteroidsSpeed;                              // Asteroid speed.
-	public int       asteroidsLeft;                               // Number of active asteroids.
+	public static int       asteroidsLeft;                               // Number of active asteroids.
 
 	// Explosion data.
 

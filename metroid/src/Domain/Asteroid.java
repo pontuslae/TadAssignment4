@@ -49,6 +49,7 @@ public class Asteroid {
 	AudioClip explosionSound;
 
 
+
 	public void initAsteroids() {
 
 		int i, j;

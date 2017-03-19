@@ -55,11 +55,11 @@ public class Main implements Runnable {
 				// Check the score and advance high score, add a new ship or start the
 				// flying saucer as necessary.
 
-				if (score > highScore)
+				if (score > Framework.highScore)
 					highScore = score;
 				if (score > newShipScore) {
 					newShipScore += NEW_SHIP_POINTS;
-					shipsLeft++;
+					Framework.shipsLeft++;
 				}
 				if (playing && score > newUfoScore && !saucer.active) {
 					newUfoScore += NEW_UFO_POINTS;
