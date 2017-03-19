@@ -37,6 +37,7 @@ public class keyControls extends Framework implements KeyListener{
 
 		    // Spacebar: fire a photon and start its counter.
 
+		  static int photonIndex = 0;
 		    if (e.getKeyChar() == ' ' && ship.active) {
 		      if (sound & !paused)
 		        fireSound.play();
@@ -44,11 +45,11 @@ public class keyControls extends Framework implements KeyListener{
 		      photonIndex++;
 		      if (photonIndex >= Framework.MAX_SHOTS)
 		        photonIndex = 0;
-		      photons[photonIndex].active = true;
-		      photons[photonIndex].x = ship.x;
-		      photons[photonIndex].y = ship.y;
-		      photons[photonIndex].deltaX = 2 * Framework.MAX_ROCK_SPEED * -Math.sin(ship.angle);
-		      photons[photonIndex].deltaY = 2 * Framework.MAX_ROCK_SPEED *  Math.cos(ship.angle);
+		      photons.get(photonIndex).active = true;
+		      photons.get(photonIndex).x = ship.x;
+		      photons.get(photonIndex).y = ship.y;
+		      photons.get(photonIndex).deltaX = 2 * Framework.MAX_ROCK_SPEED * -Math.sin(ship.angle);
+		      photons.get(photonIndex).deltaY = 2 * Framework.MAX_ROCK_SPEED *  Math.cos(ship.angle);
 		    }
 
 		    // Allow upper or lower case characters for remaining keys.
