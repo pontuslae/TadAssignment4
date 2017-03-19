@@ -12,7 +12,7 @@ import static Foundation.Audio.loadSounds;
 public class Main extends Applet implements Runnable {
 	public static Ship ship = new Ship();
 	public static Saucer saucer = new Saucer();
-	
+	public static Missle missle = new Missle(ship);
 	// Flags for game state and options.
 
 	public static boolean loaded = false;

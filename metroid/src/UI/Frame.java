@@ -9,6 +9,7 @@ import Application.*;
 import Domain.Saucer;
 import Foundation.Audio;
 
+
 import java.awt.*;
 
 
@@ -90,10 +91,10 @@ public class Frame extends Framework {
 
         c = Math.min(missleCounter * 24, 255);
         offGraphics.setColor(new Color(c, c, c));
-        if (missle.active) {
-            offGraphics.drawPolygon(missle.sprite);
-            offGraphics.drawLine(missle.sprite.xpoints[missle.sprite.npoints - 1], missle.sprite.ypoints[missle.sprite.npoints - 1],
-                   missle.sprite.xpoints[0], missle.sprite.ypoints[0]);
+        if (Main.missle.active) {
+            offGraphics.drawPolygon(Main.missle.sprite);
+            offGraphics.drawLine(Main.missle.sprite.xpoints[Main.missle.sprite.npoints - 1], Main.missle.sprite.ypoints[Main.missle.sprite.npoints - 1],
+            		Main.missle.sprite.xpoints[0], Main.missle.sprite.ypoints[0]);
         }
 
         // Draw the asteroids.
@@ -168,7 +169,7 @@ public class Frame extends Framework {
         offGraphics.setColor(Color.white);
 
         offGraphics.drawString("Score: " + score, fontWidth, fontHeight);
-        offGraphics.drawString("Ships: " + shipsLeft, fontWidth, d.height - fontHeight);
+        offGraphics.drawString("Ships: " + Main.shipsLeft, fontWidth, d.height - fontHeight);
         s = "High: " + highScore;
         offGraphics.drawString(s, d.width - (fontWidth + fm.stringWidth(s)), fontHeight);
         if (!sound) {
