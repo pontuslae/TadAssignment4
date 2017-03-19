@@ -3,6 +3,9 @@ package Domain;
 import Application.Main;
 import Foundation.*;
 
+import static Application.Main.loaded;
+import static Application.Main.sound;
+
 /**
  * Created by tim on 3/16/2017.
  */
@@ -79,7 +82,7 @@ public class Saucer extends UFO {
                         	Audio.crashSound.play();
                         Explosion.explode(this);
                         stop();
-                        score += Framework.UFO_POINTS;
+                        Application.Main.score += Framework.UFO_POINTS;
                     }
 
                 // On occassion, fire a missle at the ship if the saucer is not too
@@ -90,7 +93,7 @@ public class Saucer extends UFO {
                         active && !missle.active &&
                         d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
                         Math.random() < Framework.MISSLE_PROBABILITY)
-                    initMissle();
+                    //initMissle();
             }
         }
     }

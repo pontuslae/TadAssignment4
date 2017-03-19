@@ -2,6 +2,7 @@ package Application;
 
 import Domain.Framework;
 import static Application.Main.*;
+import static Domain.Explosion.detail;
 import static Foundation.Audio.*;
 
 import java.awt.event.KeyEvent;
