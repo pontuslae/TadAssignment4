@@ -8,7 +8,8 @@ import java.awt.event.KeyListener;
 import java.net.URL;
 
 
-public class keyControls extends Framework implements KeyListener{
+
+public class KeyControls extends Framework implements KeyListener{
 
 		// Key flags.
 		public static boolean left  = false;
