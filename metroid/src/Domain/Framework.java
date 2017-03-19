@@ -125,18 +125,6 @@ public class Framework extends Applet {
 	public int newShipScore;
 	public int newUfoScore;
 
-
-	// Flags for game state and options.
-
-	public boolean loaded = false;
-	public boolean paused;
-	public boolean playing;
-	public static boolean sound;
-	public static boolean detail;
-
-
-
-
 	// Domain.Ship data.
 
 

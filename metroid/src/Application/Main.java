@@ -10,6 +10,29 @@ import static Foundation.Audio.loadSounds;
 public class Main implements Runnable {
 	public static Ship ship = new Ship();
 	public static Saucer saucer = new Saucer();
+	
+	// Flags for game state and options.
+
+	public static boolean loaded = false;
+	public boolean paused;
+	public static boolean playing;
+	public static boolean sound;
+	
+	// Game data.
+
+	public int score;
+	public static int highScore;
+	public int newShipScore;
+	public int newUfoScore;
+	
+	public static int shipsLeft;       // Number of ships left in game, including current one.
+	public int shipCounter;     // Timer counter for ship explosion.
+	public static int hyperCounter;    // Timer counter for hyperspace.
+	
+	// Flying saucer data.
+
+	public int ufoPassesLeft;    // Counter for number of flying saucer passes.
+	public int ufoCounter;       // Timer counter used to track each flying saucer pass.
 
 	// Thread control variables.
 	Thread loadThread;
@@ -51,16 +74,16 @@ public class Main implements Runnable {
 
 				saucer.update();
 				updateAsteroids();
-				updateExplosions();
+				Explosion.updateExplosions();
 
 				// Check the score and advance high score, add a new ship or start the
 				// flying saucer as necessary.
 
-				if (score > Framework.highScore)
+				if (score > highScore)
 					highScore = score;
 				if (score > newShipScore) {
 					newShipScore += NEW_SHIP_POINTS;
-					Framework.shipsLeft++;
+					shipsLeft++;
 				}
 				if (playing && score > newUfoScore && !saucer.active) {
 					newUfoScore += NEW_UFO_POINTS;
@@ -122,14 +145,14 @@ public class Main implements Runnable {
 		for (Domain.Missle e:Framework.missles)
 			e.stopMissle();
 		initAsteroids(); // Not mine
-		initExplosions(); // Not mine
+		Explosion.initExplosions(); // Not mine
 		playing = true;
 		paused = false;
 		//photonTime = System.currentTimeMillis();
 	}
 
 
-	public void endGame() {
+	public static void endGame() {
 
 		// Stop ship, flying saucer, guided missle and associated sounds.
 

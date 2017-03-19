@@ -14,12 +14,14 @@ public class Explosion {
 
 	static int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	static int   explosionIndex;                         // Next available explosion sprite.
+	
+	public static boolean detail;
 
 	static Framework[] explosions = new Framework[MAX_SCRAP];
 	// Sound clips.
 	AudioClip explosionSound;
 	
-	public void initExplosions() {
+	public static void initExplosions() {
 
 		int i;
 
@@ -42,7 +44,7 @@ public class Explosion {
 
 		s.render();
 		c = 2;
-		if (Framework.detail || s.sprite.npoints < 6)
+		if (detail || s.sprite.npoints < 6)
 			c = 1;
 		for (i = 0; i < s.sprite.npoints; i += c) {
 			explosionIndex++;
@@ -71,7 +73,7 @@ public class Explosion {
 		}
 	}
 
-	public void updateExplosions() {
+	public static void updateExplosions() {
 
 		int i;
 		// Move any active explosion debris. Stop explosion when its counter has

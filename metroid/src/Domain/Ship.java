@@ -1,6 +1,8 @@
 package Domain;
 
 import Application.Main;
+import Foundation.Audio;
+
 import static Application.keyControls.*;
 
 /**
@@ -69,10 +71,10 @@ public class Ship extends UFO {
         revThruster.angle = angle;
         revThruster.render();
 
-        if (loaded)
-            thrustersSound.stop();
-        thrustersPlaying = false;
-        hyperCounter = 0;
+        if (Main.loaded)
+        	Audio.thrustersSound.stop();
+        Audio.thrustersPlaying = false;
+        Main.hyperCounter = 0;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class Ship extends UFO {
 
         double dx, dy, speed;
 
-        if (!playing)
+        if (!Main.playing)
             return;
 
         // Rotate the ship if left or right cursor key is down.
@@ -132,8 +134,8 @@ public class Ship extends UFO {
         if (active) {
             advance();
             render();
-            if (hyperCounter > 0)
-                hyperCounter--;
+            if (Main.hyperCounter > 0)
+            	Main.hyperCounter--;
 
             // Update the thruster sprites to match the ship sprite.
 
@@ -154,9 +156,9 @@ public class Ship extends UFO {
 
         else
         if (--counter <= 0)
-            if (shipsLeft > 0) {
+            if (Main.shipsLeft > 0) {
                 init();
-                hyperCounter = Framework.HYPER_COUNT;
+                Main.hyperCounter = Framework.HYPER_COUNT;
             }
             else
                 Main.endGame();
@@ -167,10 +169,10 @@ public class Ship extends UFO {
 
         active = false;
         counter = Framework.SCRAP_COUNT;
-        if (shipsLeft > 0)
-            shipsLeft--;
-        if (loaded)
-            thrustersSound.stop();
-        thrustersPlaying = false;
+        if (Main.shipsLeft > 0)
+        	Main.shipsLeft--;
+        if (Main.loaded)
+        	Audio.thrustersSound.stop();
+        Audio.thrustersPlaying = false;
     }
 }
