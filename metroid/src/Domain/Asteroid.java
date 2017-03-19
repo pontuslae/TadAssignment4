@@ -33,10 +33,10 @@ public class Asteroid {
 	static final double MIN_ROCK_SPEED =  40.0 / FPS;
 	static final double MAX_ROCK_SPEED = 240.0 / FPS;
 	static final double MAX_ROCK_SPIN  = Math.PI / FPS;
-	boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
-	int asteroidsCounter;                            // Break-time counter.
-	double asteroidsSpeed;                              // Asteroid speed.
-	int asteroidsLeft;                               // Number of active asteroids.
+	static boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
+	public static int asteroidsCounter;                            // Break-time counter.
+	public static double asteroidsSpeed;                              // Asteroid speed.
+	public static int asteroidsLeft;                               // Number of active asteroids.
 
 
 	//Arrays
@@ -45,9 +45,9 @@ public class Asteroid {
 
 	// Sound clips.
 
-	AudioClip crashSound;
+	static AudioClip crashSound;
 
-	public void initAsteroids() {
+	public static void initAsteroids() {
 
 		int i, j;
 		int s;
@@ -110,7 +110,7 @@ public class Asteroid {
 
 
 
-	public void initSmallAsteroids(int n) {
+	public static void initSmallAsteroids(int n) {
 
 		int count;
 		int i, j;
@@ -155,7 +155,7 @@ public class Asteroid {
 		} while (i < MAX_ROCKS && count < 2);
 	}
 
-	public void updateAsteroids() {
+	public static void updateAsteroids() {
 
 		int i, j;
 

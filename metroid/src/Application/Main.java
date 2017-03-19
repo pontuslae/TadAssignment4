@@ -3,11 +3,13 @@ package Application;
 import Domain.*;
 import UI.*;
 
+import java.applet.Applet;
+
 import static Domain.Framework.*;
 import static Domain.Photon.initPhotons;
 import static Foundation.Audio.loadSounds;
 
-public class Main implements Runnable {
+public class Main extends Applet implements Runnable {
 	public static Ship ship = new Ship();
 	public static Saucer saucer = new Saucer();
 	
@@ -73,7 +75,7 @@ public class Main implements Runnable {
 					e.updateMissle();
 
 				saucer.update();
-				updateAsteroids();
+				Asteroid.updateAsteroids();
 				Explosion.updateExplosions();
 
 				// Check the score and advance high score, add a new ship or start the
@@ -93,14 +95,14 @@ public class Main implements Runnable {
 
 				// If all asteroids have been destroyed create a new batch.
 
-				if (asteroidsLeft <= 0)
-					if (--asteroidsCounter <= 0)
-						initAsteroids();
+				if (Asteroid.asteroidsLeft <= 0)
+					if (--Asteroid.asteroidsCounter <= 0)
+						Asteroid.initAsteroids();
 			}
 
 			// Update the screen and set the timer for the next loop.
 
-			Frame.repaint();
+				repaint();
 			try {
 				startTime += DELAY;
 				Thread.sleep(Math.max(0, startTime - System.currentTimeMillis()));

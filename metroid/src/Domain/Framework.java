@@ -54,7 +54,7 @@ public class Framework extends Applet {
 	// Constants
 
 
-	static final int DELAY = 20;             // Milliseconds between screen and
+	public static final int DELAY = 20;             // Milliseconds between screen and
 	static final int FPS   =                 // the resulting frame rate.
 			Math.round(1000 / DELAY);
 

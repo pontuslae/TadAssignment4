@@ -159,7 +159,7 @@ public class Frame extends Framework {
             if (Explosion.explosions[i].active) {
                 c = (255 / SCRAP_COUNT) * Explosion.explosionCounter [i];
                 offGraphics.setColor(new Color(c, c, c));
-                offGraphics.drawPolygon(Asteroid.explosions[i].sprite);
+                offGraphics.drawPolygon(Explosion.explosions[i].sprite);
             }
 
         // Display status and messages.

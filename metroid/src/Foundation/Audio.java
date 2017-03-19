@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Audio {
+
 	public static boolean sound;
 	int DELAY;
 	public static int clipTotal = 0;
