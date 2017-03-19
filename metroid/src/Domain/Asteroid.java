@@ -1,6 +1,8 @@
 package Domain;
 
-import Domain.Main;
+import static Application.Main.saucer;
+import static Application.Main.ship;
+import static Domain.Framework.*;
 
 import java.applet.AudioClip;
 import java.awt.Polygon;
@@ -178,23 +180,23 @@ public class Asteroid {
 	              explosionSound.play();
 	            explode(asteroids[i]);
 	            if (!asteroidIsSmall[i]) {
-	              Framework.score += Framework.BIG_POINTS;
+	              score += Framework.BIG_POINTS;
 	              initSmallAsteroids(i);
 	            }
 	            else
-	              Framework.score += Framework.SMALL_POINTS;
+	              score += Framework.SMALL_POINTS;
 	          }
 
 	        // If the ship is not in hyperspace, see if it is hit.
 
-	        if (UFO.ship.active && Framework.hyperCounter <= 0 &&
-	            asteroids[i].active && asteroids[i].isColliding(UFO.ship)) {
+	        if (ship.active && Framework.hyperCounter <= 0 &&
+	            asteroids[i].active && asteroids[i].isColliding(ship)) {
 	          if (Framework.sound)
 	            crashSound.play();
-	          explode(Framework.ship);
-	          UFO.stopShip();
-	          UFO.stopUfo();
-	          UFO.stopMissle();
+	          explode(ship);
+	          saucer.stopShip();
+	          saucer.stopsaucer();
+	          saucer.stopMissle();
 	        }
 	    }
 	  }
