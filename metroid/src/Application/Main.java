@@ -77,7 +77,8 @@ public class Main extends Applet implements Runnable {
 					e.updateMissle();
 
 				saucer.update();
-				Asteroid.updateAsteroids();
+				for (Asteroid e: asteroids)
+					e.updateAsteroids();
 				Explosion.updateExplosions();
 
 				// Check the score and advance high score, add a new ship or start the

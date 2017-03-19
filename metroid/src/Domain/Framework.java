@@ -141,6 +141,7 @@ public class Framework extends Applet {
 
 	public static ArrayList<Photon> photons = new ArrayList<>();
 	public static ArrayList<Missle> missles = new ArrayList<>();
+	public static ArrayList<Asteroid> asteroids = new ArrayList<>();
 
 
 	// Asteroid data.

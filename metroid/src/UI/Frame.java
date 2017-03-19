@@ -82,9 +82,9 @@ public class Frame extends Framework {
         // Draw photon bullets.
 
         offGraphics.setColor(Color.white);
-        for (i = 0; i < Projectile.MAX_SHOTS; i++)
-            if (Asteroid.photons[i].active)
-                offGraphics.drawPolygon(Asteroid.photons[i].sprite);
+        for (Projectile e: photons)
+            if (e.active)
+                offGraphics.drawPolygon(e.sprite);
 
         // Draw the guided missle, counter is used to quickly fade color to black
         // when near expiration.
@@ -99,16 +99,16 @@ public class Frame extends Framework {
 
         // Draw the asteroids.
 
-        for (i = 0; i < MAX_ROCKS; i++)
-            if (Asteroid.asteroids[i].active) {
+        for (Asteroid e: asteroids)
+            if (e.active) {
                 if (detail) {
                     offGraphics.setColor(Color.black);
-                    offGraphics.fillPolygon(Asteroid.asteroids[i].sprite);
+                    offGraphics.fillPolygon(e.sprite);
                 }
                 offGraphics.setColor(Color.white);
-                offGraphics.drawPolygon(Asteroid.asteroids[i].sprite);
-                offGraphics.drawLine(Asteroid.asteroids[i].sprite.xpoints[Asteroid.asteroids[i].sprite.npoints - 1], Asteroid.asteroids[i].sprite.ypoints[Asteroid.asteroids[i].sprite.npoints - 1],
-                        Asteroid.asteroids[i].sprite.xpoints[0], Asteroid.asteroids[i].sprite.ypoints[0]);
+                offGraphics.drawPolygon(e.sprite);
+                offGraphics.drawLine(e.sprite.xpoints[e.sprite.npoints - 1], e.sprite.ypoints[e.sprite.npoints - 1],
+                        e.sprite.xpoints[0], e.sprite.ypoints[0]);
             }
 
         // Draw the flying saucer.

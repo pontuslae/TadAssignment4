@@ -12,7 +12,7 @@ import java.awt.Polygon;
 import Application.Main;
 import Foundation.Audio;
 
-public class Asteroid {
+public class Asteroid extends Framework {
 
 	static final int DELAY = 20;             // Milliseconds between screen and
 	static final int FPS   =                 // the resulting frame rate.
@@ -40,10 +40,6 @@ public class Asteroid {
 	public static int asteroidsLeft;                               // Number of active asteroids.
 
 
-	//Arrays
-	public static Framework[] photons    = new Framework[MAX_SHOTS];
-	public static Framework[] asteroids  = new Framework[MAX_ROCKS];
-
 	// Sound clips.
 
 	static AudioClip crashSound;
@@ -57,49 +53,49 @@ public class Asteroid {
 
 		// Create random shapes, positions and movements for each asteroid.
 
-		for (i = 0; i < MAX_ROCKS; i++) {
+		for (Asteroid e: Framework.asteroids) {
 
 			// Create a jagged shape for the asteroid and give it a random rotation.
 
-			asteroids[i].shape = new Polygon();
+			e.shape = new Polygon();
 			s = MIN_ROCK_SIDES + (int) (Math.random() * (MAX_ROCK_SIDES - MIN_ROCK_SIDES));
 			for (j = 0; j < s; j ++) {
 				theta = 2 * Math.PI / s * j;
 				r = MIN_ROCK_SIZE + (int) (Math.random() * (MAX_ROCK_SIZE - MIN_ROCK_SIZE));
 				x = (int) -Math.round(r * Math.sin(theta));
 				y = (int)  Math.round(r * Math.cos(theta));
-				asteroids[i].shape.addPoint(x, y);
+				e.shape.addPoint(x, y);
 			}
-			asteroids[i].active = true;
-			asteroids[i].angle = 0.0;
-			asteroids[i].deltaAngle = Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN;
+			e.active = true;
+			e.angle = 0.0;
+			e.deltaAngle = Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN;
 
 			// Place the asteroid at one edge of the screen.
 
 			if (Math.random() < 0.5) {
-				asteroids[i].x = -Framework.width / 2;
+				e.x = -Framework.width / 2;
 				if (Math.random() < 0.5)
-					asteroids[i].x = Framework.width / 2;
-				asteroids[i].y = Math.random() * Framework.height;
+					e.x = Framework.width / 2;
+				e.y = Math.random() * Framework.height;
 			}
 			else {
-				asteroids[i].x = Math.random() * Framework.width;
-				asteroids[i].y = -Framework.height / 2;
+				e.x = Math.random() * Framework.width;
+				e.y = -Framework.height / 2;
 				if (Math.random() < 0.5)
-					asteroids[i].y = Framework.height / 2;
+					e.y = Framework.height / 2;
 			}
 
 			// Set a random motion for the asteroid.
 
-			asteroids[i].deltaX = Math.random() * asteroidsSpeed;
+			e.deltaX = Math.random() * asteroidsSpeed;
 			if (Math.random() < 0.5)
-				asteroids[i].deltaX = -asteroids[i].deltaX;
-			asteroids[i].deltaY = Math.random() * asteroidsSpeed;
+				e.deltaX = -e.deltaX;
+			e.deltaY = Math.random() * asteroidsSpeed;
 			if (Math.random() < 0.5)
-				asteroids[i].deltaY = -asteroids[i].deltaY;
+				e.deltaY = -e.deltaY;
 
-			asteroids[i].render();
-			asteroidIsSmall[i] = false;
+			e.render();
+			// asteroidIsSmall[i] = false; // wtf does this do.
 		}
 
 		asteroidsCounter = STORM_PAUSE;
@@ -111,7 +107,7 @@ public class Asteroid {
 
 
 
-	public static void initSmallAsteroids(int n) {
+	public void initSmallAsteroids(int n) {
 
 		int count;
 		int i, j;
@@ -127,27 +123,27 @@ public class Asteroid {
 
 		count = 0;
 		i = 0;
-		tempX = asteroids[n].x;
-		tempY = asteroids[n].y;
+		tempX = this.x;
+		tempY = this.y;
 		do {
-			if (!asteroids[i].active) {
-				asteroids[i].shape = new Polygon();
+			if (!active) {
+				this.shape = new Polygon();
 				s = MIN_ROCK_SIDES + (int) (Math.random() * (MAX_ROCK_SIDES - MIN_ROCK_SIDES));
 				for (j = 0; j < s; j ++) {
 					theta = 2 * Math.PI / s * j;
 					r = (MIN_ROCK_SIZE + (int) (Math.random() * (MAX_ROCK_SIZE - MIN_ROCK_SIZE))) / 2;
 					x = (int) -Math.round(r * Math.sin(theta));
 					y = (int)  Math.round(r * Math.cos(theta));
-					asteroids[i].shape.addPoint(x, y);
+					shape.addPoint(x, y);
 				}
-				asteroids[i].active = true;
-				asteroids[i].angle = 0.0;
-				asteroids[i].deltaAngle = Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN;
-				asteroids[i].x = tempX;
-				asteroids[i].y = tempY;
-				asteroids[i].deltaX = Math.random() * 2 * asteroidsSpeed - asteroidsSpeed;
-				asteroids[i].deltaY = Math.random() * 2 * asteroidsSpeed - asteroidsSpeed;
-				asteroids[i].render();
+				active = true;
+				angle = 0.0;
+				deltaAngle = Math.random() * 2 * MAX_ROCK_SPIN - MAX_ROCK_SPIN;
+				x = (int) tempX;
+				y = (int) tempY;
+				deltaX = Math.random() * 2 * asteroidsSpeed - asteroidsSpeed;
+				deltaY = Math.random() * 2 * asteroidsSpeed - asteroidsSpeed;
+				render();
 				asteroidIsSmall[i] = true;
 				count++;
 				asteroidsLeft++;
@@ -156,31 +152,28 @@ public class Asteroid {
 		} while (i < MAX_ROCKS && count < 2);
 	}
 
-	public static void updateAsteroids() {
-
-		int i, j;
-
+	public void updateAsteroids() {
 		// Move any active asteroids and check for collisions.
 
-		for (i = 0; i < MAX_ROCKS; i++)
-			if (asteroids[i].active) {
-				asteroids[i].advance();
-				asteroids[i].render();
+		for (Asteroid jayZ: asteroids)
+			if (jayZ.active) {
+				jayZ.advance();
+				jayZ.render();
 
 				// If hit by photon, kill asteroid and advance score. If asteroid is
 				// large, make some smaller ones to replace it.
 
-				for (j = 0; j < MAX_SHOTS; j++)
-					if (photons[j].active && asteroids[i].active && asteroids[i].isColliding(photons[j])) {
+				for (Photon e: photons)
+					if (e.active && e.active && e.isColliding(e)) {
 						asteroidsLeft--;
-						asteroids[i].active = false;
-						photons[j].active = false;
+						e.active = false;
+						e.active = false;
 						if (sound)
 							Audio.explosionSound.play();
-						Explosion.explode(asteroids[i]);
-						if (!asteroidIsSmall[i]) {
+						Explosion.explode(e);
+						if (!asteroidIsSmall[0]) {
 							score += Framework.BIG_POINTS;
-							initSmallAsteroids(i);
+							this.initSmallAsteroids(0);
 						}
 						else
 							score += Framework.SMALL_POINTS;
@@ -189,7 +182,7 @@ public class Asteroid {
 				// If the ship is not in hyperspace, see if it is hit.
 
 				if (ship.active && Main.hyperCounter <= 0 &&
-						asteroids[i].active && asteroids[i].isColliding(ship)) {
+						jayZ.active && jayZ.isColliding(ship)) {
 					if (sound)
 						crashSound.play();
 					Explosion.explode(ship);
