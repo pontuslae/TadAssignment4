@@ -128,11 +128,11 @@ public class Framework extends Applet {
 
 	// Flags for game state and options.
 
-	public boolean loaded = false;
-	public boolean paused;
-	public boolean playing;
-	public boolean sound;
-	public boolean detail;
+	public static boolean loaded = false;
+	public static boolean paused;
+	public static boolean playing;
+	public static boolean sound;
+	public static boolean detail;
 
 
 

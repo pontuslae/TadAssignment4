@@ -1,6 +1,7 @@
 package Application;
 
 import Domain.*;
+import UI.*;
 
 import static Domain.Framework.*;
 import static Foundation.Audio.loadSounds;
@@ -8,6 +9,11 @@ import static Foundation.Audio.loadSounds;
 public class Main implements Runnable {
 	public static Ship ship = new Ship();
 	public static Saucer saucer = new Saucer();
+
+	// Thread control variables.
+	Thread loadThread;
+	Thread loopThread;
+
 	public void run() {
 
 		int i, j;
@@ -70,7 +76,7 @@ public class Main implements Runnable {
 
 			// Update the screen and set the timer for the next loop.
 
-			repaint();
+			Frame.repaint();
 			try {
 				startTime += DELAY;
 				Thread.sleep(Math.max(0, startTime - System.currentTimeMillis()));
@@ -103,6 +109,27 @@ public class Main implements Runnable {
 			loadThread = null;
 		}
 	}
+
+	public void initGame() {
+		// Initialize game data and sprites.
+
+		score = 0;
+		shipsLeft = MAX_SHIPS;
+		asteroidsSpeed = MIN_ROCK_SPEED;
+		newShipScore = NEW_SHIP_POINTS;
+		newUfoScore = NEW_UFO_POINTS;
+		initShip();
+		initPhotons();
+		stopUfo();
+		stopMissle();
+		initAsteroids();
+		initExplosions();
+		playing = true;
+		paused = false;
+		photonTime = System.currentTimeMillis();
+	}
+
+
 	public void endGame() {
 
 		// Stop ship, flying saucer, guided missle and associated sounds.

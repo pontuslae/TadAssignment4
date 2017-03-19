@@ -161,10 +161,6 @@ public class Asteroids extends Applet implements Runnable, KeyListener {
   String copyText = copyName + '\n' + copyVers + '\n'
                   + copyInfo + '\n' + copyLink;
 
-  // Thread control variables.
-
-  Thread loadThread;
-  Thread loopThread;
 
   // Constants
 
