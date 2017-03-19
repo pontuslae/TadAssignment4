@@ -2,15 +2,6 @@ package Domain;
 
 public class Photon extends Projectile {
 
-	public void initPhotons() {
-
-		int i;
-
-		for (i = 0; i < MAX_SHOTS; i++)
-			active = false;
-		photonIndex = 0;
-	}
-
 	public void updatePhotons() {
 		int i;
 		// Move any active photons. Stop it when its counter has expired.
@@ -21,5 +12,10 @@ public class Photon extends Projectile {
 				else
 					active = false;
 			}
+	}
+
+	public static void initPhotons() {
+		for (Domain.Photon e:Framework.photons)
+			e.active = false;
 	}
 }

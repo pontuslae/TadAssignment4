@@ -4,6 +4,7 @@ import Domain.*;
 import UI.*;
 
 import static Domain.Framework.*;
+import static Domain.Photon.initPhotons;
 import static Foundation.Audio.loadSounds;
 
 public class Main implements Runnable {
@@ -118,9 +119,10 @@ public class Main implements Runnable {
 		ship.init();
 		initPhotons();
 		saucer.stop();
-		stopMissle();
-		initAsteroids();
-		initExplosions();
+		for (Domain.Missle e:Framework.missles)
+			e.stopMissle();
+		initAsteroids(); // Not mine
+		initExplosions(); // Not mine
 		playing = true;
 		paused = false;
 		//photonTime = System.currentTimeMillis();
