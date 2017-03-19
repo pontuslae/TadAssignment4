@@ -4,8 +4,13 @@ import Domain.Framework;
 import Domain.Projectile;
 import Domain.Ship;
 
+import static Application.Main.*;
+import static Domain.Explosion.explode;
 import static Foundation.Audio.crashSound;
 import static Foundation.Audio.missleSound;
+import static Foundation.Audio.sound;
+import static Foundation.Audio.sound;
+
 
 public class Missle extends Projectile {
 
@@ -47,7 +52,7 @@ public class Missle extends Projectile {
 						hyperCounter <= 0 && ship.isColliding(this)) {
 					if (sound)
 						crashSound.play();
-					ship.explode(ship);
+					explode(ship);
 					ship.stop();
 					stopMissle();
 				}

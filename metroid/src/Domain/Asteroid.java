@@ -2,6 +2,8 @@ package Domain;
 
 import static Application.Main.saucer;
 import static Application.Main.ship;
+import static Application.Main.score;
+import static Foundation.Audio.sound;
 import static Domain.Framework.*;
 
 import java.applet.AudioClip;
@@ -172,7 +174,7 @@ public class Asteroid {
 						asteroidsLeft--;
 						asteroids[i].active = false;
 						photons[j].active = false;
-						if (Framework.sound)
+						if (sound)
 							Audio.explosionSound.play();
 						Explosion.explode(asteroids[i]);
 						if (!asteroidIsSmall[i]) {
@@ -187,7 +189,7 @@ public class Asteroid {
 
 				if (ship.active && Framework.hyperCounter <= 0 &&
 						asteroids[i].active && asteroids[i].isColliding(ship)) {
-					if (Framework.sound)
+					if (sound)
 						crashSound.play();
 					Explosion.explode(ship);
 					saucer.stop();
