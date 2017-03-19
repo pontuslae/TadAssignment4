@@ -21,9 +21,9 @@ public class Audio {
 
 	// Flags for looping sound clips.
 
-	static boolean thrustersPlaying;
-	static boolean saucerPlaying;
-	static boolean misslePlaying;
+	public static boolean thrustersPlaying;
+	public static boolean saucerPlaying;
+	public static boolean misslePlaying;
 
 	public static void loadSounds() {
 

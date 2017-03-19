@@ -3,6 +3,7 @@ package Application;
 import Domain.*;
 
 import static Domain.Framework.*;
+import static Foundation.Audio.loadSounds;
 
 public class Main implements Runnable {
 	public static Ship ship = new Ship();

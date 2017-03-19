@@ -22,8 +22,8 @@ public class Framework extends Applet {
 
 	// Fields:
 
-	static int width;          // Dimensions of the graphics area.
-	static int height;
+	public static int width;          // Dimensions of the graphics area.
+	public static int height;
 
 	Polygon shape = new Polygon();;             // Base sprite shape, centered at the origin (0,0).
 	public static boolean active = false;            // Active flag.
