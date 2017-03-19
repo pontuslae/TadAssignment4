@@ -49,7 +49,7 @@ public class Saucer extends UFO {
             deltaY = deltaY;
         render();
         Audio.saucerPlaying = true;
-        if (sound)
+        if (Audio.sound)
         	Audio.saucerSound.loop();
         counter = (int) Math.abs(Framework.width / deltaX);
     }
@@ -75,18 +75,18 @@ public class Saucer extends UFO {
                 render();
                 for (i = 0; i < Framework.MAX_SHOTS; i++)
                     if (Asteroid.photons[i].active && isColliding(Asteroid.photons[i])) {
-                        if (sound)
+                        if (Audio.sound)
                         	Audio.crashSound.play();
                         Explosion.explode(this);
                         stop();
-                        score += Framework.UFO_POINTS;
+                        Main.score += Framework.UFO_POINTS;
                     }
 
                 // On occassion, fire a missle at the ship if the saucer is not too
                 // close to it.
 
                 d = (int) Math.max(Math.abs(x - Main.ship.x), Math.abs(y - Main.ship.y));
-                if (Main.ship.active && hyperCounter <= 0 &&
+                if (Main.ship.active && Main.hyperCounter <= 0 &&
                         active && !missle.active &&
                         d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
                         Math.random() < Framework.MISSLE_PROBABILITY)
@@ -101,7 +101,7 @@ public class Saucer extends UFO {
         active = false;
         counter = 0;
         ufoPassesLeft = 0;
-        if (loaded)
+        if (Main.loaded)
         	Audio.saucerSound.stop();
         Audio.saucerPlaying = false;
     }

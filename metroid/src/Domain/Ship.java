@@ -3,7 +3,9 @@ package Domain;
 import Application.Main;
 import Foundation.Audio;
 
-import static Application.keyControls.*;
+import static Application.KeyControls.*;
+
+import Application.KeyControls;
 
 /**
  * Created by tim on 3/16/2017.
@@ -87,12 +89,12 @@ public class Ship extends UFO {
 
         // Rotate the ship if left or right cursor key is down.
 
-        if (left) {
+        if (KeyControls.left) {
             angle += Framework.SHIP_ANGLE_STEP;
             if (angle > 2 * Math.PI)
                 angle -= 2 * Math.PI;
         }
-        if (right) {
+        if (KeyControls.right) {
             angle -= Framework.SHIP_ANGLE_STEP;
             if (angle < 0)
                 angle += 2 * Math.PI;
@@ -102,27 +104,27 @@ public class Ship extends UFO {
 
         dx = Framework.SHIP_SPEED_STEP * -Math.sin(angle);
         dy = Framework.SHIP_SPEED_STEP *  Math.cos(angle);
-        if (up) {
+        if (KeyControls.up) {
             deltaX += dx;
             deltaY += dy;
         }
-        if (down) {
+        if (KeyControls.down) {
             deltaX -= dx;
             deltaY -= dy;
         }
 
         // Don't let ship go past the speed limit.
 
-        if (up || down) {
+        if (KeyControls.up || KeyControls.down) {
             speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             if (speed > Framework.MAX_SHIP_SPEED) {
                 dx = Framework.MAX_SHIP_SPEED * -Math.sin(angle);
                 dy = Framework.MAX_SHIP_SPEED *  Math.cos(angle);
-                if (up)
+                if (KeyControls.up)
                     deltaX = dx;
                 else
                     deltaX = -dx;
-                if (up)
+                if (KeyControls.up)
                     deltaY = dy;
                 else
                     deltaY = -dy;

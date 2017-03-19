@@ -20,7 +20,7 @@ public class Main implements Runnable {
 	
 	// Game data.
 
-	public int score;
+	public static int score;
 	public static int highScore;
 	public int newShipScore;
 	public int newUfoScore;
