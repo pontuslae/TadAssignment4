@@ -1,7 +1,10 @@
-package Domain;
+package Application;
+
+import Domain.*;
 
 public class Main implements Runnable {
-
+		public static Ship ship = new Ship();
+		public static Saucer saucer = new Saucer();
 	  public void run() {
 
 		    int i, j;
@@ -28,9 +31,9 @@ public class Main implements Runnable {
 
 		        // Move and process all sprites.
 
-		        updateShip();
+		        ship.update();
 		        updatePhotons();
-		        updateUfo();
+		        saucer.update();
 		        updateMissle();
 		        updateAsteroids();
 		        updateExplosions();
@@ -44,10 +47,10 @@ public class Main implements Runnable {
 		          newShipScore += NEW_SHIP_POINTS;
 		          shipsLeft++;
 		        }
-		        if (playing && score > newUfoScore && !ufo.active) {
+		        if (playing && score > newUfoScore && !saucer.active) {
 		          newUfoScore += NEW_UFO_POINTS;
 		          ufoPassesLeft = UFO_PASSES;
-		          initUfo();
+		          saucer.init();
 		        }
 
 		        // If all asteroids have been destroyed create a new batch.
@@ -97,8 +100,8 @@ public class Main implements Runnable {
 				    // Stop ship, flying saucer, guided missle and associated sounds.
 
 				    playing = false;
-				    stopShip();
-				    stopUfo();
+				    ship.stop();
+				    saucer.stop();
 				    stopMissle();
 				  }
 	
