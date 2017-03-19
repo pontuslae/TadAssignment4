@@ -32,9 +32,14 @@ public class Main implements Runnable {
 		        // Move and process all sprites.
 
 		        ship.update();
-		        updatePhotons();
+
+			      /// :)))))))))))))))))))))))))))))))))))))))))))))
+			      for (Domain.Photon e:Framework.photons)
+				      e.updatePhotons();
+			      for (Domain.Missle e:Framework.missles)
+				      e.updateMissle();
+
 		        saucer.update();
-		        updateMissle();
 		        updateAsteroids();
 		        updateExplosions();
 

@@ -59,7 +59,7 @@ public class Framework extends Applet {
 	static final int FPS   =                 // the resulting frame rate.
 			Math.round(1000 / DELAY);
 
-	static final int MAX_SHOTS =  8;          // Maximum number of sprites
+	public static final int MAX_SHOTS =  8;          // Maximum number of sprites
 	public static final int MAX_ROCKS =  8;          // for photons, asteroids and
 	public static final int MAX_SCRAP = 40;          // explosions.
 
@@ -164,7 +164,8 @@ public class Framework extends Applet {
 	public int missleCounter;    // Counter for life of missle.
 
 
-	public static ArrayList<Projectile> photons = new ArrayList<>();
+	public static ArrayList<Photon> photons = new ArrayList<>();
+	public static ArrayList<Missle> missles = new ArrayList<>();
 
 
 	// Asteroid data.
