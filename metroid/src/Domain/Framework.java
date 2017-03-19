@@ -26,7 +26,7 @@ public class Framework extends Applet {
 	public static int height;
 
 	Polygon shape = new Polygon();;             // Base sprite shape, centered at the origin (0,0).
-	public static boolean active = false;            // Active flag.
+	public boolean active = false;            // Active flag.
 	public double  angle = 0.0;             // Current angle of rotation.
 	public double  deltaAngle = 0.0;        // Amount to change the rotation angle.
 	public double  x = 0.0, y = 0.0;              // Current position on screen.

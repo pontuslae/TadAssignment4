@@ -90,12 +90,16 @@ public class Saucer extends UFO {
                 // On occassion, fire a missle at the ship if the saucer is not too
                 // close to it.
 
-                d = (int) Math.max(Math.abs(x - Main.ship.x), Math.abs(y - Main.ship.y));
-                if (Main.ship.active && Main.hyperCounter <= 0 &&
-                        active && !missle.active &&
-                        d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
-                        Math.random() < Framework.MISSLE_PROBABILITY)
-                    //initMissle();
+	            d = (int) Math.max(Math.abs(x - Main.ship.x), Math.abs(y - Main.ship.y));
+	            for (Missle e: Framework.missles){
+		            if (e.active){
+			            if (Main.ship.active && Main.hyperCounter <= 0 && active &&
+					            d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
+					            Math.random() < Framework.MISSLE_PROBABILITY)
+			            	new Missle(Main.ship);
+		            }
+	            }
+
             }
         }
     }
