@@ -1,5 +1,7 @@
 package Domain;
 
+import Application.Main;
+
 /**
  * Created by tim on 3/16/2017.
  */
@@ -48,7 +50,7 @@ public class Saucer extends UFO {
         saucerPlaying = true;
         if (sound)
             saucerSound.loop();
-        counter = (int) Math.abs(Framework.width / ufo.deltaX);
+        counter = (int) Math.abs(Framework.width / deltaX);
     }
 
     @Override
@@ -82,8 +84,8 @@ public class Saucer extends UFO {
                 // On occassion, fire a missle at the ship if the saucer is not too
                 // close to it.
 
-                d = (int) Math.max(Math.abs(x - ship.x), Math.abs(y - ship.y));
-                if (ship.active && hyperCounter <= 0 &&
+                d = (int) Math.max(Math.abs(x - Main.ship.x), Math.abs(y - Main.ship.y));
+                if (Main.ship.active && hyperCounter <= 0 &&
                         active && !missle.active &&
                         d > Framework.MAX_ROCK_SPEED * FPS / 2 &&
                         Math.random() < Framework.MISSLE_PROBABILITY)
