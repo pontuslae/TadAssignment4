@@ -104,10 +104,7 @@ public class Main implements Runnable {
 			loopThread.stop();
 			loopThread = null;
 		}
-		if (loadThread != null) {
-			loadThread.stop();
-			loadThread = null;
-		}
+
 	}
 
 	public void initGame() {
