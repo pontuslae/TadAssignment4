@@ -120,7 +120,7 @@ public class Framework extends Applet {
 
 	// Game data.
 
-	public int score;
+	public static int score;
 	public int highScore;
 	public int newShipScore;
 	public int newUfoScore;
