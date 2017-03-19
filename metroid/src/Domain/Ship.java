@@ -8,29 +8,32 @@ import static Application.keyControls.*;
  */
 public class Ship extends UFO {
 
-    public static Framework ship;
+    //public static Framework ship;
     public static Framework fwdThruster, revThruster;
 
-
+    public Ship(){
+    	fwdThruster = new Framework();
+    	revThruster = new Framework();
+    }
     @Override
     public void draw(){
         // Create shape for the ship sprite.
 
-        ship = new Framework();
-        ship.shape.addPoint(0, -10);
-        ship.shape.addPoint(7, 10);
-        ship.shape.addPoint(-7, 10);
+       // ship = new Framework();
+        shape.addPoint(0, -10);
+        shape.addPoint(7, 10);
+        shape.addPoint(-7, 10);
     }
 
     public void drawThrusters(){
             // Create shapes for the ship thrusters.
 
-        fwdThruster = new Framework();
+        //fwdThruster = new Framework();
         fwdThruster.shape.addPoint(0, 12);
         fwdThruster.shape.addPoint(-3, 16);
         fwdThruster.shape.addPoint(0, 26);
         fwdThruster.shape.addPoint(3, 16);
-        revThruster = new Framework();
+        //revThruster = new Framework();
         revThruster.shape.addPoint(-2, 12);
         revThruster.shape.addPoint(-4, 14);
         revThruster.shape.addPoint(-2, 20);
@@ -46,24 +49,24 @@ public class Ship extends UFO {
 
         // Reset the ship sprite at the center of the screen.
 
-        ship.active = true;
-        ship.angle = 0.0;
-        ship.deltaAngle = 0.0;
-        ship.x = 0.0;
-        ship.y = 0.0;
-        ship.deltaX = 0.0;
-        ship.deltaY = 0.0;
-        ship.render();
+        active = true;
+        angle = 0.0;
+        deltaAngle = 0.0;
+        x = 0.0;
+        y = 0.0;
+        deltaX = 0.0;
+        deltaY = 0.0;
+        render();
 
         // Initialize thruster sprites.
 
-        fwdThruster.x = ship.x;
-        fwdThruster.y = ship.y;
-        fwdThruster.angle = ship.angle;
+        fwdThruster.x = x;
+        fwdThruster.y = y;
+        fwdThruster.angle = angle;
         fwdThruster.render();
-        revThruster.x = ship.x;
-        revThruster.y = ship.y;
-        revThruster.angle = ship.angle;
+        revThruster.x = x;
+        revThruster.y = y;
+        revThruster.angle = angle;
         revThruster.render();
 
         if (loaded)
@@ -83,64 +86,64 @@ public class Ship extends UFO {
         // Rotate the ship if left or right cursor key is down.
 
         if (left) {
-            ship.angle += Framework.SHIP_ANGLE_STEP;
-            if (ship.angle > 2 * Math.PI)
-                ship.angle -= 2 * Math.PI;
+            angle += Framework.SHIP_ANGLE_STEP;
+            if (angle > 2 * Math.PI)
+                angle -= 2 * Math.PI;
         }
         if (right) {
-            ship.angle -= Framework.SHIP_ANGLE_STEP;
-            if (ship.angle < 0)
-                ship.angle += 2 * Math.PI;
+            angle -= Framework.SHIP_ANGLE_STEP;
+            if (angle < 0)
+                angle += 2 * Math.PI;
         }
 
         // Fire thrusters if up or down cursor key is down.
 
-        dx = Framework.SHIP_SPEED_STEP * -Math.sin(ship.angle);
-        dy = Framework.SHIP_SPEED_STEP *  Math.cos(ship.angle);
+        dx = Framework.SHIP_SPEED_STEP * -Math.sin(angle);
+        dy = Framework.SHIP_SPEED_STEP *  Math.cos(angle);
         if (up) {
-            ship.deltaX += dx;
-            ship.deltaY += dy;
+            deltaX += dx;
+            deltaY += dy;
         }
         if (down) {
-            ship.deltaX -= dx;
-            ship.deltaY -= dy;
+            deltaX -= dx;
+            deltaY -= dy;
         }
 
         // Don't let ship go past the speed limit.
 
         if (up || down) {
-            speed = Math.sqrt(ship.deltaX * ship.deltaX + ship.deltaY * ship.deltaY);
+            speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             if (speed > Framework.MAX_SHIP_SPEED) {
-                dx = Framework.MAX_SHIP_SPEED * -Math.sin(ship.angle);
-                dy = Framework.MAX_SHIP_SPEED *  Math.cos(ship.angle);
+                dx = Framework.MAX_SHIP_SPEED * -Math.sin(angle);
+                dy = Framework.MAX_SHIP_SPEED *  Math.cos(angle);
                 if (up)
-                    ship.deltaX = dx;
+                    deltaX = dx;
                 else
-                    ship.deltaX = -dx;
+                    deltaX = -dx;
                 if (up)
-                    ship.deltaY = dy;
+                    deltaY = dy;
                 else
-                    ship.deltaY = -dy;
+                    deltaY = -dy;
             }
         }
 
         // Move the ship. If it is currently in hyperspace, advance the countdown.
 
-        if (ship.active) {
-            ship.advance();
-            ship.render();
+        if (active) {
+            advance();
+            render();
             if (hyperCounter > 0)
                 hyperCounter--;
 
             // Update the thruster sprites to match the ship sprite.
 
-            fwdThruster.x = ship.x;
-            fwdThruster.y = ship.y;
-            fwdThruster.angle = ship.angle;
+            fwdThruster.x = x;
+            fwdThruster.y = y;
+            fwdThruster.angle = angle;
             fwdThruster.render();
-            revThruster.x = ship.x;
-            revThruster.y = ship.y;
-            revThruster.angle = ship.angle;
+            revThruster.x = x;
+            revThruster.y = y;
+            revThruster.angle = angle;
             revThruster.render();
         }
 
@@ -152,7 +155,7 @@ public class Ship extends UFO {
         else
         if (--counter <= 0)
             if (shipsLeft > 0) {
-                ship.init();
+                init();
                 hyperCounter = Framework.HYPER_COUNT;
             }
             else
@@ -162,7 +165,7 @@ public class Ship extends UFO {
     @Override
     public void stop() {
 
-        ship.active = false;
+        active = false;
         counter = Framework.SCRAP_COUNT;
         if (shipsLeft > 0)
             shipsLeft--;
