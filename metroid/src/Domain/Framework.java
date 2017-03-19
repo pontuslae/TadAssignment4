@@ -26,7 +26,7 @@ public class Framework extends Applet {
 	public static int height;
 
 	Polygon shape = new Polygon();;             // Base sprite shape, centered at the origin (0,0).
-	public boolean active = false;            // Active flag.
+	public static boolean active = false;            // Active flag.
 	public double  angle = 0.0;             // Current angle of rotation.
 	public double  deltaAngle = 0.0;        // Amount to change the rotation angle.
 	public double  x = 0.0, y = 0.0;              // Current position on screen.
@@ -117,13 +117,8 @@ public class Framework extends Applet {
 	public int     numStars;
 	public Point[] stars;
 
+
 	// Domain.Ship data.
-
-
-	public int shipsLeft;       // Number of ships left in game, including current one.
-	public int shipCounter;     // Timer counter for ship explosion.
-	public static int hyperCounter;    // Timer counter for hyperspace.
-
 
 	// Photon data.
 

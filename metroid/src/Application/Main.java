@@ -1,18 +1,20 @@
 package Application;
 
 import Domain.*;
+import Foundation.Audio;
 import UI.*;
 
 import java.applet.Applet;
 
 import static Domain.Framework.*;
 import static Domain.Photon.initPhotons;
-import static Foundation.Audio.loadSounds;
+
 
 public class Main extends Applet implements Runnable {
 	public static Ship ship = new Ship();
 	public static Saucer saucer = new Saucer();
 	public static Missle missle = new Missle(ship);
+	Audio audio = new Audio();
 	// Flags for game state and options.
 
 	public static boolean loaded = false;
@@ -53,7 +55,7 @@ public class Main extends Applet implements Runnable {
 		// Run thread for loading sounds.
 
 		if (!loaded && Thread.currentThread() == loadThread) {
-			loadSounds();
+			audio.loadSounds();
 			loaded = true;
 			loadThread.stop();
 		}

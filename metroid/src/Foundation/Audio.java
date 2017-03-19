@@ -1,11 +1,13 @@
 package Foundation;
 
+import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Audio {
-
+public class Audio extends Applet implements Runnable {
+	
+	
 	public static boolean sound;
 	int DELAY;
 	public static int clipTotal = 0;
@@ -26,25 +28,25 @@ public class Audio {
 	public static boolean saucerPlaying;
 	public static boolean misslePlaying;
 
-	public static void loadSounds() {
+	public void loadSounds() {
 
 		// Load all sound clips by playing and immediately stopping them. Update
 		// counter and total for display.
 
 		try {
-			crashSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "crash.au"));
+			crashSound = getAudioClip(new URL(getCodeBase(), "crash.au"));
 			clipTotal++;
-			explosionSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "explosion.au"));
+			explosionSound = getAudioClip(new URL(getCodeBase(), "explosion.au"));
 			clipTotal++;
-			fireSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "fire.au"));
+			fireSound = getAudioClip(new URL(getCodeBase(), "fire.au"));
 			clipTotal++;
-			missleSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "missle.au"));
+			missleSound = getAudioClip(new URL(getCodeBase(), "missle.au"));
 			clipTotal++;
-			saucerSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "saucer.au"));
+			saucerSound = getAudioClip(new URL(getCodeBase(), "saucer.au"));
 			clipTotal++;
-			thrustersSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "thrusters.au"));
+			thrustersSound = getAudioClip(new URL(getCodeBase(), "thrusters.au"));
 			clipTotal++;
-			warpSound = Game.basic.getAudioClip(new URL(Game.basic.getCodeBase(), "warp.au"));
+			warpSound = getAudioClip(new URL(getCodeBase(), "warp.au"));
 			clipTotal++;
 
 		} catch (MalformedURLException e) {
@@ -56,40 +58,46 @@ public class Audio {
 
 			crashSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			explosionSound.play();
 			explosionSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			fireSound.play();
 			fireSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			missleSound.play();
 			missleSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			saucerSound.play();
 			saucerSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			thrustersSound.play();
 			thrustersSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 			warpSound.play();
 			warpSound.stop();
 			clipsLoaded++;
-			Game.basic.repaint();
-			Thread.currentThread().sleep(Game.DELAY);
+			repaint();
+			Thread.currentThread().sleep(DELAY);
 		} catch (InterruptedException e) {
 		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

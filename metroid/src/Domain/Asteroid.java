@@ -9,6 +9,7 @@ import static Domain.Framework.*;
 import java.applet.AudioClip;
 import java.awt.Polygon;
 
+import Application.Main;
 import Foundation.Audio;
 
 public class Asteroid {
@@ -187,7 +188,7 @@ public class Asteroid {
 
 				// If the ship is not in hyperspace, see if it is hit.
 
-				if (ship.active && Framework.hyperCounter <= 0 &&
+				if (ship.active && Main.hyperCounter <= 0 &&
 						asteroids[i].active && asteroids[i].isColliding(ship)) {
 					if (sound)
 						crashSound.play();
