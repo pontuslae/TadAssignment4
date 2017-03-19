@@ -33,7 +33,6 @@ public class Audio extends Applet implements Runnable {
 		// Load all sound clips by playing and immediately stopping them. Update
 		// counter and total for display.
 
-		/*
 		try {
 
 			crashSound = getAudioClip(new URL(getCodeBase(), "crash.au"));
@@ -52,6 +51,8 @@ public class Audio extends Applet implements Runnable {
 			clipTotal++;
 
 		} catch (MalformedURLException e) {
+		} catch (NullPointerException ex) {
+			System.out.println("SOMEONE DIDN'T DO THEIR JOB CORRECTLY");
 		}
 
 		try {
@@ -94,7 +95,7 @@ public class Audio extends Applet implements Runnable {
 			Thread.currentThread().sleep(DELAY);
 		} catch (InterruptedException e) {
 		}
-		*/
+
 
 	}
 
