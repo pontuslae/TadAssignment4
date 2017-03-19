@@ -4,6 +4,9 @@ import Domain.Framework;
 import Domain.Projectile;
 import Domain.Ship;
 
+import static Foundation.Audio.crashSound;
+import static Foundation.Audio.missleSound;
+
 public class Missle extends Projectile {
 
 	boolean misslePlaying = true;

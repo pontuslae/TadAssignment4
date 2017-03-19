@@ -134,9 +134,6 @@ public class Framework extends Applet {
 	public static boolean sound;
 	public static boolean detail;
 
-
-
-
 	// Domain.Ship data.
 
 

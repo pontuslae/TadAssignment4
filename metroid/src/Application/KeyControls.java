@@ -124,8 +124,9 @@ public class KeyControls extends Framework implements KeyListener{
 
 		// 'S' key: start the game, if not already in progress.
 
+
 		if (c == 's' && loaded && !playing)
-			initGame();
+			initGame(); // TODO fix this. no idea what it is.
 
 		// 'HOME' key: jump to web site (undocumented).
 

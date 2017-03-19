@@ -115,18 +115,18 @@ public class Main implements Runnable {
 
 		score = 0;
 		shipsLeft = MAX_SHIPS;
-		asteroidsSpeed = MIN_ROCK_SPEED;
+		// asteroidsSpeed = MIN_ROCK_SPEED;
 		newShipScore = NEW_SHIP_POINTS;
 		newUfoScore = NEW_UFO_POINTS;
-		initShip();
-		initPhotons();
-		stopUfo();
-		stopMissle();
-		initAsteroids();
-		initExplosions();
+		//initShip();
+		//initPhotons();
+		//stopUfo();
+		//stopMissle();
+		//initAsteroids();
+		//initExplosions();
 		playing = true;
 		paused = false;
-		photonTime = System.currentTimeMillis();
+		//photonTime = System.currentTimeMillis();
 	}
 
 

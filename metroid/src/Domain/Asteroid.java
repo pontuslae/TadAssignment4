@@ -9,26 +9,6 @@ import java.awt.Polygon;
 
 public class Asteroid {
 
-	static final int DELAY = 20;             // Milliseconds between screen and
-	static final int FPS   =                 // the resulting frame rate.
-			Math.round(1000 / DELAY);
-
-	static final int MAX_SHOTS =  8;          // Maximum number of sprites
-	static final int MAX_ROCKS =  8;          // for photons, asteroids and
-	static final int MAX_SCRAP = 40;          // explosions.
-
-	static final int SCRAP_COUNT  = 2 * FPS;  // Timer counter starting values
-	static final int HYPER_COUNT  = 3 * FPS;  // calculated using number of
-	static final int MISSLE_COUNT = 4 * FPS;  // seconds x frames per second.
-	static final int STORM_PAUSE  = 2 * FPS;
-
-	static final int    MIN_ROCK_SIDES =   6; // Ranges for asteroid shape, size
-	static final int    MAX_ROCK_SIDES =  16; // speed and rotation.
-	static final int    MIN_ROCK_SIZE  =  20;
-	static final int    MAX_ROCK_SIZE  =  40;
-	static final double MIN_ROCK_SPEED =  40.0 / FPS;
-	static final double MAX_ROCK_SPEED = 240.0 / FPS;
-	static final double MAX_ROCK_SPIN  = Math.PI / FPS;
 	boolean[] asteroidIsSmall = new boolean[MAX_ROCKS];    // Asteroid size flag.
 	int       asteroidsCounter;                            // Break-time counter.
 	double    asteroidsSpeed;                              // Asteroid speed.
@@ -39,10 +19,6 @@ public class Asteroid {
 	int[] explosionCounter = new int[MAX_SCRAP];  // Time counters for explosions.
 	int   explosionIndex;                         // Next available explosion sprite.
 
-	//Arrays
-	public static Framework[] photons    = new Framework[MAX_SHOTS];
-	public static Framework[] asteroids  = new Framework[MAX_ROCKS];
-	public static Framework[] explosions = new Framework[MAX_SCRAP];
 	// Sound clips.
 
 	AudioClip crashSound;
